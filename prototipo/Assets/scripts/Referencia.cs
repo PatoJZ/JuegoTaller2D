@@ -29,7 +29,6 @@ public class GeneradorEntidades : MonoBehaviour
     private float tiempoTranscurrido = 0f;
 
 
-
     private void Start()
     {
         StartCoroutine(GenerarEntidadesPorFases());

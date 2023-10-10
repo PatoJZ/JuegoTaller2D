@@ -6120,6 +6120,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6201,6 +6202,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e73e9271963b041be3a9f3a6cbb880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1590873898}
 --- !u!1 &575881018
 GameObject:
   m_ObjectHideFlags: 0
@@ -6533,6 +6547,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1590873898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
+  m_PrefabInstance: {fileID: 8328560217750380664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1607404105
 GameObject:
   m_ObjectHideFlags: 0
@@ -6633,6 +6652,19 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1607904436902039893, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
   m_PrefabInstance: {fileID: 8328560217750380664}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1844666262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590873898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fde77a6e1fb244d8c21bad0451a83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1001 &1021211100002835114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7278,6 +7310,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1072804961}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1844666262}
     - targetCorrespondingSourceObject: {fileID: 5964394525603479335, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
