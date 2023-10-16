@@ -5,36 +5,31 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     
-    bool perseguir=true; 
+    public bool chase=true;
     public GameObject PlayerM;
+    private Rigidbody2D enemyRb;
+    [SerializeField] private Vector2 speedBounce;
     [SerializeField] private float speed;
-    [SerializeField] private float health= 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemyRb=GetComponent<Rigidbody2D>();
     }
 
     //funcion para quitar vida al enemigo
-    public void TakeEnemyDamage(float damage)
+    
+    public void Bounce(Vector2 pointHit)
     {
-        health -= damage;
-        if (health<=0)
-        {
-            Dead();
-        }
-    }
-    private void Dead()
-    {
-        Destroy(gameObject);
+        enemyRb.velocity = new Vector2(-speedBounce.x * pointHit.x, -speedBounce.y);
     }
     void Update()
     {
-        if (perseguir)
+        if (chase)
         {
+            enemyRb.velocity = new Vector2(0,0);
             transform.position = Vector2.MoveTowards(transform.position,new Vector2(PlayerM.transform.position.x, PlayerM.transform.position.y) ,speed*Time.deltaTime);
         }
-        
+        //Debug.Log(chase);
     }
 }
