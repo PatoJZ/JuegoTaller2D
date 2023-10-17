@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     private EnemyMove enemyMove;
-    [SerializeField] private float health = 3;
+    [SerializeField] public float health = 3;
     [SerializeField] private float timeOutOfControl;
     private void Start()
     {
@@ -27,6 +27,7 @@ public class EnemyAttack : MonoBehaviour
     private void Dead()
     {
         Destroy(gameObject);
+        FindObjectOfType<RoundManager>().EnemigoEliminado();
     }
     private IEnumerator OutOfControl()
     {
@@ -34,8 +35,12 @@ public class EnemyAttack : MonoBehaviour
         yield return new WaitForSeconds(timeOutOfControl);
         enemyMove.chase = true;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("PJ"))
+        {
+            collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(1,collision.GetContact(0).normal);
+            Debug.Log(collision.GetContact(0).normal);
+        }
     }
 }

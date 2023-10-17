@@ -4,26 +4,52 @@ using UnityEngine;
 
 public class EntitySpawner : MonoBehaviour
 {
+    public RoundManager roundManager;
     public GameObject entidadPrefab; // Prefab de la entidad que deseas generar.
-    public Transform jugador; // Referencia al transform del jugador.
-    public float radioSpawn = 10f; // Radio en el cual se generará la entidad.
+    public GameObject Player;
+    public float radioSpawn = 5f; // Radio en el cual se generará la entidad.
     public float tiempoEspera = 3f; // Tiempo de espera entre generaciones.
     private bool jugadorDentroDelRadio = false;
     private float tiempoUltimaGeneracion = 0f;
 
     // Update is called once per frame
-    private void OnDrawGizmos()
+   
+    public void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Vector3 jugadorPosition = GameObject.FindWithTag("PJ").transform.position;
+
+        float distanciaAlJugador = Vector3.Distance(transform.position, jugadorPosition);
+
+        if (distanciaAlJugador <= radioSpawn)
+        {
+           // Debug.Log("Está dentro");
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.green;
+        }
         Gizmos.DrawWireSphere(transform.position, radioSpawn);
     }
-    private void Update()
+    
+    public IEnumerator GenerarEntidad()
     {
-        float distanciaAlJugador = Vector3.Distance(transform.position, jugador.position);
+        yield return new WaitForSeconds(3f);
+        Vector3 posicionSpawn = transform.position;
+        Instantiate(entidadPrefab, posicionSpawn, Quaternion.identity);
+        roundManager.EnemigoGenerado(); // Informa al RoundManager.
+    }
+    public void calculoRadioGeneracion()
+    {
+        // Obtén la posición actual del jugador en tiempo de ejecución.
+        Vector3 jugadorPosition = GameObject.FindWithTag("PJ").transform.position;
+
+        float distanciaAlJugador = Vector3.Distance(transform.position, jugadorPosition);
 
         if (distanciaAlJugador <= radioSpawn)
         {
             jugadorDentroDelRadio = true;
+           // Debug.Log("Está dentro");
         }
         else
         {
@@ -32,13 +58,18 @@ public class EntitySpawner : MonoBehaviour
 
         if (jugadorDentroDelRadio && Time.time - tiempoUltimaGeneracion >= tiempoEspera)
         {
-            GenerarEntidad();
+            StartCoroutine(GenerarEntidad());
             tiempoUltimaGeneracion = Time.time;
         }
     }
-    private void GenerarEntidad()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector3 posicionSpawn = transform.position;
-        Instantiate(entidadPrefab, posicionSpawn, Quaternion.identity);
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.transform.GetComponent<EnemyMove>().PlayerM = Player;
+
+        }
+        
     }
+
 }

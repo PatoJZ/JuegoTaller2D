@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float radioStroke;
     [SerializeField] private float hitDamage;
     [SerializeField] private float timeattack;
-    [SerializeField] private float prueba;
+    [SerializeField] private float timeOutOfControl;
     private PlayerControl playerControl;
     private Animator playerAnimator;
     float timer=1;
@@ -46,6 +47,10 @@ public class PlayerAttack : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
+                if (collider.transform.GetComponent<EnemyAttack>().health-hitDamage<=0)
+                {
+                    playerControl.point += 10;
+                }
                 collider.transform.GetComponent<EnemyAttack>().TakeEnemyDamage(hitDamage, collider.transform.position);
             }
         }
@@ -72,6 +77,29 @@ public class PlayerAttack : MonoBehaviour
         
         controllerStroke.transform.position = new Vector3(sizeX, sizeY, controllerStroke.transform.position.z);
         
+    }
+    public void TakeDamage(float damage, Vector2 position)
+    {
+        playerControl.health -= damage;
+        if (playerControl.health <= 0)
+        {
+            Dead();
+        }
+        else
+        {
+            StartCoroutine(OutOfControl());
+            playerControl.Bounce(playerControl.savePlace);
+        }
+    }
+    private void Dead()
+    {
+        SceneManager.LoadScene(4);
+    }
+    private IEnumerator OutOfControl()
+    {
+        playerControl.canMove = false;
+        yield return new WaitForSeconds(timeOutOfControl);
+        playerControl.canMove = true;
     }
     private void OnDrawGizmos()
     {
