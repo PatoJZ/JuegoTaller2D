@@ -21,4 +21,15 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(NewScene);
     }
+    public void EndGame()
+    {
+        Application.Quit();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PJ"))
+        {
+            SceneManager.LoadScene(NewScene);
+        }
+    }
 }

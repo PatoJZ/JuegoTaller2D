@@ -50,8 +50,10 @@ public class PlayerAttack : MonoBehaviour
                 if (collider.transform.GetComponent<EnemyAttack>().health-hitDamage<=0)
                 {
                     playerControl.point += 10;
+                    ControllerPoint.instance.PlusPoint(10);
+                    Debug.Log(ControllerPoint.instance.point);
                 }
-                collider.transform.GetComponent<EnemyAttack>().TakeEnemyDamage(hitDamage, collider.transform.position);
+                collider.transform.GetComponent<EnemyAttack>().TakeEnemyDamage(hitDamage, -playerControl.savePlace);
             }
         }
     }
@@ -93,7 +95,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Dead()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(2);
     }
     private IEnumerator OutOfControl()
     {

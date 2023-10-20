@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
+        ControllerPoint.instance.InitialPoint(0);
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         savePlace=new Vector2(0,-1);

@@ -188,5 +188,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chase: 1
   PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
-  speedBounce: {x: 2, y: 2}
+  speedBounce: {x: 5, y: 5}
   speed: 3
