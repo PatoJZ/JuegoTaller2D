@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
-    
+    [Header("Hitbox Ataque")]
     [SerializeField] private Transform controllerStroke;
     [SerializeField] private float radioStroke;
     [SerializeField] private float hitDamage;
+    [Header("Tiempos")]
     [SerializeField] private float timeattack;
     [SerializeField] private float timeOutOfControl;
+    [SerializeField] private float timeOutOfInvulnerability;
     private PlayerControl playerControl;
     private Animator playerAnimator;
     float timer=1;
@@ -33,7 +35,6 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetKeyDown("space")&& timer<0)
         {
-            Debug.Log("hola");
             playerAnimator.SetBool("Attack",true);
             hit();
             timer = timeattack;
@@ -42,21 +43,22 @@ public class PlayerAttack : MonoBehaviour
     }
     public void hit()
     {
+        //se crea un collider en el controllerStroke
         Collider2D[] objects = Physics2D.OverlapCircleAll(controllerStroke.position,radioStroke);
         foreach (Collider2D collider in objects)
         {
             if (collider.CompareTag("Enemy"))
             {
+                //se agrega puntos cuando el enemigo esta a un toque
                 if (collider.transform.GetComponent<EnemyAttack>().health-hitDamage<=0)
                 {
-                    playerControl.point += 10;
-                    ControllerPoint.instance.PlusPoint(10);
-                    Debug.Log(ControllerPoint.instance.point);
+                    ControllerSave.instance.PlusPoint(10);
                 }
                 collider.transform.GetComponent<EnemyAttack>().TakeEnemyDamage(hitDamage, -playerControl.savePlace);
             }
         }
     }
+    //modificar la posicion del controllerstroke
     private void changeFlipX()
     {
         BoxCollider2D boxcollider = GetComponent<BoxCollider2D>();
@@ -80,6 +82,7 @@ public class PlayerAttack : MonoBehaviour
         controllerStroke.transform.position = new Vector3(sizeX, sizeY, controllerStroke.transform.position.z);
         
     }
+    //resivir daño del player
     public void TakeDamage(float damage, Vector2 position)
     {
         playerControl.health -= damage;
@@ -89,19 +92,30 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
+            //se le quitara control del player y dara invulnerabilidad
             StartCoroutine(OutOfControl());
+            StartCoroutine(TimeOfInvulnerability());
             playerControl.Bounce(playerControl.savePlace);
         }
     }
+    //se cargara la escena
     private void Dead()
     {
         SceneManager.LoadScene(2);
     }
+    //se quitara el control del player
     private IEnumerator OutOfControl()
     {
         playerControl.canMove = false;
         yield return new WaitForSeconds(timeOutOfControl);
         playerControl.canMove = true;
+    }
+    //se le agregara invulnerabilidad del player
+    private IEnumerator TimeOfInvulnerability()
+    {
+        Physics2D.IgnoreLayerCollision(7,6,true);
+        yield return new WaitForSeconds(timeOutOfControl*5);
+        Physics2D.IgnoreLayerCollision(7, 6,false);
     }
     private void OnDrawGizmos()
     {

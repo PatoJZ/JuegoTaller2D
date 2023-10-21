@@ -19722,7 +19722,7 @@ GameObject:
   - component: {fileID: 581184154}
   - component: {fileID: 581184153}
   m_Layer: 0
-  m_Name: ControllerPoint
+  m_Name: ControllerSave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19737,10 +19737,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 581184152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b697842799901224887191925299a309, type: 3}
+  m_Script: {fileID: 11500000, guid: 68875e332e5ed2945bcd19b5d7ff8d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   point: 0
+  life: 0
 --- !u!4 &581184154
 Transform:
   m_ObjectHideFlags: 0
@@ -20123,6 +20124,7 @@ GameObject:
   - component: {fileID: 901433456}
   - component: {fileID: 901433455}
   - component: {fileID: 901433458}
+  - component: {fileID: 901433459}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -20220,6 +20222,20 @@ MonoBehaviour:
   Target: {fileID: 2628989}
   minPosition: {x: -15.17, y: -8.23}
   maxPosition: {x: 15.3, y: 9.58}
+--- !u!114 &901433459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901433454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c83b99a676b6c04d9fb477cbfec6273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPoint: {fileID: 1370623407}
+  textHealth: {fileID: 706254060}
 --- !u!1 &1105621119
 GameObject:
   m_ObjectHideFlags: 0
@@ -29499,7 +29515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1688861401687945569, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
       propertyPath: timeOutOfControl
-      value: 0.8
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688861401687945569, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
+      propertyPath: timeOutOfInvulnerability
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1976050671336317190, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
       propertyPath: m_Size.x

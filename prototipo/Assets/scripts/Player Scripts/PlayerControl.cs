@@ -5,21 +5,21 @@ using TMPro;
 
 public class PlayerControl : MonoBehaviour
 {
+    [Header("Movimientos")]
     [SerializeField] public float health = 3;
     [SerializeField] private float speed = 3f;
-    [SerializeField] public float point;
     [SerializeField] private Vector2 speedBounce;
-    public TMP_Text textHealth;
-    public TMP_Text textPoint;
     public bool canMove = false;
-    private Rigidbody2D playerRb;
-    private Animator playerAnimator;
+    [Header("Posicion Jugador")]
     public Vector2 savePlace;
     private Vector2 moveInput;
+    private Rigidbody2D playerRb;
+    private Animator playerAnimator;
 
     void Start()
     {
-        ControllerPoint.instance.InitialPoint(0);
+        ControllerSave.instance.KnowLife(health);
+        ControllerSave.instance.InitialPoint(0);
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         savePlace=new Vector2(0,-1);
@@ -33,40 +33,32 @@ public class PlayerControl : MonoBehaviour
     public void Bounce(Vector2 pointHit)
     {
         playerRb.velocity = new Vector2(-speedBounce.x*pointHit.x,-speedBounce.y*pointHit.y);
-        Debug.Log("bounmce: "+(new Vector2(-speedBounce.x * pointHit.x, -speedBounce.y * pointHit.y)));
-        
     }
     // Update is called once per frame
     void Update()
     {
         //Poner Imputs
-        
+        // el Input.GetAxisRaw("Horizontal") entrega entre un 1,-1 y 0 apretando las teclas a o d 
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moveInput= new Vector2(moveX,moveY).normalized;
-        if (moveX!=0 || moveY!=0)
+        if (moveX!=0&& canMove || moveY!=0 && canMove)
         {
             savePlace = new Vector2(moveX, moveY);
         }
+        //se escoge la animacion
         Animation(savePlace.x,savePlace.y);
-        textHealth.text = "Salud= "+health;
-        textPoint.text = "Puntos= " +point;
-        Debug.Log(canMove);
     }
     private void FixedUpdate()
     {
         //Arreglar fisicas
         if (canMove)
         {
-            Debug.Log(speedBounce);
+            // se anula la velocidad de rebote
             playerRb.velocity = new Vector2(0,0);
             playerRb.MovePosition(playerRb.position+moveInput*speed*Time.fixedDeltaTime);
         }
         
-        
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
         
     }
 

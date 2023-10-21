@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class ControllerPoint : MonoBehaviour
+public class ControllerSave : MonoBehaviour
 {
-    public static ControllerPoint instance;
+    public static ControllerSave instance;
     [SerializeField] public float point;
+    [SerializeField] public float life;
     // Start is called before the first frame update
     private void Awake()
     {
-        if (ControllerPoint.instance==null)
+        if (ControllerSave.instance==null)
         {
-            ControllerPoint.instance = this;
+            ControllerSave.instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -19,7 +21,12 @@ public class ControllerPoint : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+    //saber la Vida
+    public void KnowLife(float _life)
+    {
+        life =_life;
+    }
+    // agregar puntaje
     public void PlusPoint(float plusPoint)
     {
         point += plusPoint;

@@ -1220,10 +1220,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775065675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84167bfe7603db14691d366a7f468b50, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c83b99a676b6c04d9fb477cbfec6273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textPoint: {fileID: 352946204}
+  textHealth: {fileID: 0}
 --- !u!1 &2090415312
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    
+    [Header("No modificar")]
     public bool chase=true;
     public GameObject PlayerM;
     private Rigidbody2D enemyRb;
+    [Header("Velocidades")]
     [SerializeField] private Vector2 speedBounce;
     [SerializeField] private float speed;
 
@@ -18,8 +19,6 @@ public class EnemyMove : MonoBehaviour
         StartCoroutine(Desactivated_colision());
     }
 
-    //funcion para quitar vida al enemigo
-    
     public void Bounce(Vector2 pointHit)
     {
         enemyRb.velocity = new Vector2(-speedBounce.x * pointHit.x, -speedBounce.y*pointHit.y);
@@ -33,13 +32,10 @@ public class EnemyMove : MonoBehaviour
     }
     void Update()
     {
-
         if (chase)
         {
             enemyRb.velocity = new Vector2(0,0);
             transform.position = Vector2.MoveTowards(transform.position,new Vector2(PlayerM.transform.position.x, PlayerM.transform.position.y) ,speed*Time.deltaTime);
         }
-        //Debug.Log(chase);
-
     }
 }

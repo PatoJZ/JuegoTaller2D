@@ -5,8 +5,9 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    [Header("Tiempos")]
     public GameObject Target;
+    [Header("Medidas de la sala")]
     [SerializeField] Vector2 minPosition;
     [SerializeField] Vector2 maxPosition;
 
