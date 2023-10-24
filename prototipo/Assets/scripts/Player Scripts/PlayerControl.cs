@@ -12,23 +12,58 @@ public class PlayerControl : MonoBehaviour
     public bool canMove = false;
     [Header("Posicion Jugador")]
     public Vector2 savePlace;
+    [Header("Power Up")]
+    public float timePowerUp;
+    public float multiplySpeed;
     private Vector2 moveInput;
     private Rigidbody2D playerRb;
     private Animator playerAnimator;
-
+    BasicInteraction basicInteraction;
     void Start()
     {
-        ControllerSave.instance.KnowLife(health);
-        ControllerSave.instance.InitialPoint(0);
+        //ControllerSave.instance.KnowLife(health);
+        //ControllerSave.instance.InitialPoint(0);
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         savePlace=new Vector2(0,-1);
     }
     //cambiar de lado la escala
-    void Animation(float x,float y)
+    void Animation(float x,float y,float moveX,float moveY)
     {
         playerAnimator.SetFloat("Horizontal", x);
         playerAnimator.SetFloat("Vertical", y);
+        if (moveX != 0 || moveY != 0)
+        {
+            playerAnimator.SetBool("Move", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Move", false);
+        }
+    }
+    public IEnumerator MoreSpeed()
+    {
+        Debug.Log("funcion");
+        speed *= multiplySpeed;
+        yield return new WaitForSeconds(timePowerUp);
+        speed /= multiplySpeed;
+    }
+    void Inputs()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        moveInput = new Vector2(moveX, moveY).normalized;
+        if (moveX != 0 && canMove || moveY != 0 && canMove)
+        {
+            savePlace = new Vector2(moveX, moveY);
+        }
+        if (Input.GetKeyDown("e"))
+        {
+            if (basicInteraction!=null)
+            {
+                basicInteraction.Interact(savePlace,transform.position);
+            }
+        }
     }
     public void Bounce(Vector2 pointHit)
     {
@@ -37,17 +72,11 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Poner Imputs
-        // el Input.GetAxisRaw("Horizontal") entrega entre un 1,-1 y 0 apretando las teclas a o d 
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-        moveInput= new Vector2(moveX,moveY).normalized;
-        if (moveX!=0&& canMove || moveY!=0 && canMove)
+        Inputs();
+        if (Time.timeScale!=0)
         {
-            savePlace = new Vector2(moveX, moveY);
+            Animation(savePlace.x, savePlace.y, Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
-        //se escoge la animacion
-        Animation(savePlace.x,savePlace.y);
     }
     private void FixedUpdate()
     {
@@ -57,9 +86,23 @@ public class PlayerControl : MonoBehaviour
             // se anula la velocidad de rebote
             playerRb.velocity = new Vector2(0,0);
             playerRb.MovePosition(playerRb.position+moveInput*speed*Time.fixedDeltaTime);
+        } 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interaction"))
+        {
+            basicInteraction = collision.GetComponent<BasicInteraction>();
+            Debug.Log("hola");
         }
         
-        
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interaction"))
+        {
+            basicInteraction = null;
+        }
     }
 
 }

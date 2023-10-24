@@ -8,11 +8,14 @@ public class PlayerAttack : MonoBehaviour
     [Header("Hitbox Ataque")]
     [SerializeField] private Transform controllerStroke;
     [SerializeField] private float radioStroke;
-    [SerializeField] private float hitDamage;
+    [SerializeField] public float hitDamage;
     [Header("Tiempos")]
+    public float timePowerUp;
     [SerializeField] private float timeattack;
     [SerializeField] private float timeOutOfControl;
     [SerializeField] private float timeOutOfInvulnerability;
+    [Header("PowerUp")]
+    public float multiplyForce;
     private PlayerControl playerControl;
     private Animator playerAnimator;
     float timer=1;
@@ -33,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
         {
             playerAnimator.SetBool("Attack", false);
         }
-        if (Input.GetKeyDown("space")&& timer<0)
+        if (Input.GetKeyDown("space")&& timer<0&& Time.timeScale!=0)
         {
             playerAnimator.SetBool("Attack",true);
             hit();
@@ -55,8 +58,10 @@ public class PlayerAttack : MonoBehaviour
                     ControllerSave.instance.PlusPoint(10);
                 }
                 collider.transform.GetComponent<EnemyAttack>().TakeEnemyDamage(hitDamage, -playerControl.savePlace);
+                
             }
         }
+        Debug.Log(hitDamage);
     }
     //modificar la posicion del controllerstroke
     private void changeFlipX()
@@ -116,6 +121,12 @@ public class PlayerAttack : MonoBehaviour
         Physics2D.IgnoreLayerCollision(7,6,true);
         yield return new WaitForSeconds(timeOutOfControl*5);
         Physics2D.IgnoreLayerCollision(7, 6,false);
+    }
+    public IEnumerator MoreForce()
+    {
+        hitDamage*=multiplyForce;
+        yield return new WaitForSeconds(timePowerUp);
+        hitDamage/=multiplyForce;
     }
     private void OnDrawGizmos()
     {
