@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GivePowerUp : MonoBehaviour
 {
-    public enum Directions { SPEED,FORCE}
+    public enum Directions { SPEED,FORCE,SPEEDFORCE}
     public Directions powerUp;
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PJ"))
@@ -14,18 +15,20 @@ public class GivePowerUp : MonoBehaviour
             {
                 case Directions.SPEED:
                     
-                    StartCoroutine(collision.GetComponent<PlayerControl>().MoreSpeed());
-                    Debug.Log("Speed");
+                    collision.GetComponent<PlayerAttack>().PutPowerUp("Speed");
                     break;
                 case Directions.FORCE:
-                    StartCoroutine(collision.GetComponent<PlayerAttack>().MoreForce());
+                    collision.GetComponent<PlayerAttack>().PutPowerUp("Force");
+                    break;
+                case Directions.SPEEDFORCE:
+                    collision.GetComponent<PlayerAttack>().PutPowerUp("SpeedAttack");
                     break;
                 default:
                     break;
                 
             }
-            
+
         }
-        
+        Destroy(gameObject);
     }
 }

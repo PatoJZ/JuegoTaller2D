@@ -44,10 +44,21 @@ public class EnemyAttack : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("PJ"))
         {
             collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(damageAttack,collision.GetContact(0).normal);
             ControllerSave.instance.KnowLife(collision.gameObject.GetComponent<PlayerControl>().health);
+            
+        }
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            Debug.Log(FindObjectOfType<PlayerAttack>().hitDamage);
+            TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
         }
     }
 }

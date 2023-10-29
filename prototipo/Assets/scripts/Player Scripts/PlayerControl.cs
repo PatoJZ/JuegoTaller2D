@@ -7,15 +7,13 @@ public class PlayerControl : MonoBehaviour
 {
     [Header("Movimientos")]
     [SerializeField] public float health = 3;
-    [SerializeField] private float speed = 3f;
+    [SerializeField] public float speed = 3f;
     [SerializeField] private Vector2 speedBounce;
     public bool canMove = false;
     [Header("Posicion Jugador")]
     public Vector2 savePlace;
-    [Header("Power Up")]
-    public float timePowerUp;
-    public float multiplySpeed;
     private Vector2 moveInput;
+    private PlayerAttack playerAttack;
     private Rigidbody2D playerRb;
     private Animator playerAnimator;
     BasicInteraction basicInteraction;
@@ -25,14 +23,26 @@ public class PlayerControl : MonoBehaviour
         //ControllerSave.instance.InitialPoint(0);
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        playerAttack = GetComponent<PlayerAttack>();
+        //Setear cosas
+        playerAttack.SetHitDamage();
         savePlace=new Vector2(0,-1);
     }
     //cambiar de lado la escala
-    void Animation(float x,float y,float moveX,float moveY)
+    void Animation(float x,float y)
     {
-        playerAnimator.SetFloat("Horizontal", x);
-        playerAnimator.SetFloat("Vertical", y);
-        if (moveX != 0 || moveY != 0)
+        if (!playerAnimator.GetBool("Attack"))
+        {
+            playerAnimator.SetFloat("Horizontal", x);
+            playerAnimator.SetFloat("Vertical", y);
+        }
+        else
+        {
+            playerAnimator.SetFloat("Horizontal", savePlace.x);
+            playerAnimator.SetFloat("Vertical", savePlace.y);
+        }
+        
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             playerAnimator.SetBool("Move", true);
         }
@@ -41,29 +51,45 @@ public class PlayerControl : MonoBehaviour
             playerAnimator.SetBool("Move", false);
         }
     }
-    public IEnumerator MoreSpeed()
-    {
-        Debug.Log("funcion");
-        speed *= multiplySpeed;
-        yield return new WaitForSeconds(timePowerUp);
-        speed /= multiplySpeed;
-    }
     void Inputs()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-        moveInput = new Vector2(moveX, moveY).normalized;
-        if (moveX != 0 && canMove || moveY != 0 && canMove)
+        if (!playerAnimator.GetBool("Attack"))
         {
-            savePlace = new Vector2(moveX, moveY);
+            moveInput = new Vector2(moveX, moveY).normalized;
         }
-        if (Input.GetKeyDown("e"))
+        else
         {
-            if (basicInteraction!=null)
+            moveInput = Vector2.zero;
+        }
+        if (!playerAnimator.GetBool("Attack"))
+        {
+            if (moveX != 0 && canMove || moveY != 0 && canMove)
             {
-                basicInteraction.Interact(savePlace,transform.position);
+                savePlace = new Vector2(moveX, moveY);
             }
         }
+        if (!playerAnimator.GetBool("Attack") && Time.timeScale != 0)
+        {
+            //primero se cambiara arma y despues se atacara
+            if (Input.GetKeyDown("c"))
+            {
+                playerAttack.ChangeWeapon();
+            }else if (Input.GetKeyDown("space"))
+            {
+                playerAnimator.SetBool("Attack", true);
+            }
+        }
+        //para interectuar con dialogos o carteles
+        if (Input.GetKeyDown("e"))
+        {
+            if (basicInteraction != null)
+            {
+                basicInteraction.Interact(savePlace, transform.position);
+            }
+        }
+
     }
     public void Bounce(Vector2 pointHit)
     {
@@ -75,7 +101,7 @@ public class PlayerControl : MonoBehaviour
         Inputs();
         if (Time.timeScale!=0)
         {
-            Animation(savePlace.x, savePlace.y, Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Animation(savePlace.x, savePlace.y);
         }
     }
     private void FixedUpdate()
