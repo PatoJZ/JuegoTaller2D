@@ -27,8 +27,7 @@ public class GivePowerUp : MonoBehaviour
                     break;
                 
             }
-
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

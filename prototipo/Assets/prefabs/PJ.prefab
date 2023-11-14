@@ -1,5 +1,76 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5474109605820223419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8966313688961960906}
+  - component: {fileID: 2973751320706754547}
+  m_Layer: 0
+  m_Name: controllerLimit
+  m_TagString: Limit
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8966313688961960906
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474109605820223419}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1607904436902039893}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!70 &2973751320706754547
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474109605820223419}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.002660036, y: 0.000062942505}
+  m_Size: {x: 5.99178, y: 5.993473}
+  m_Direction: 0
 --- !u!1 &7377940980398133958
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +106,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5249427375548610401}
+  - {fileID: 8966313688961960906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -83,7 +155,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: 1968174282, guid: fb3adabd843e92c4285d4da368906a4a, type: 3}
+  m_Sprite: {fileID: 1740273602, guid: e2520523281d5df4fa576aac5796e3ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,7 +182,9 @@ MonoBehaviour:
   speed: 5
   speedBounce: {x: 5, y: 5}
   canMove: 1
-  savePlace: {x: 0, y: 0}
+  canAttack: 1
+  savePlace: {x: 0, y: -1}
+  angulo_base: {x: 0, y: 0}
 --- !u!114 &1688861401687945569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,10 +199,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerStroke: {fileID: 5249427375548610401}
   radioStroke: 0.65
+  controllerLimit: {fileID: 8966313688961960906}
+  radioLimit: 3
+  hitDamageHacha: 1
+  hitDamageShovel: 0
   hitDamage: 1
-  timeattack: 0.2
+  timePowerUp: 5
   timeOutOfControl: 0.5
   timeOutOfInvulnerability: 2
+  multiplyForce: 3
+  multiplySpeed: 2
+  multiplySpeedMove: 0
+  multiplySpeedAttack: 2
+  weapon: 0
 --- !u!61 &1976050671336317190
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,13 +315,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5249427375548610401}
   - component: {fileID: 7628475786053596826}
+  - component: {fileID: 531985507545463759}
   m_Layer: 0
   m_Name: controllerStroke
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5249427375548610401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -310,3 +394,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &531985507545463759
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7779234068808166418}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0019090176, y: 0.0022779703}
+  m_Size: {x: 1.2971399, y: 1.2971399}
+  m_Direction: 0

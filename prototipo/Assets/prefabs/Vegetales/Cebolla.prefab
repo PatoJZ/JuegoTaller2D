@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -2795912249465310908}
   - component: {fileID: 548344801255307553}
   - component: {fileID: 5571846955667278448}
+  - component: {fileID: 1720029834379334160}
   m_Layer: 6
   m_Name: Cebolla
   m_TagString: Enemy
@@ -173,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  damageAttack: 1
   timeOutOfControl: 0.3
 --- !u!114 &5571846955667278448
 MonoBehaviour:
@@ -186,7 +188,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9826ca58238cd124ca4e43326d7ff60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: 0
   chase: 1
   PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
   speedBounce: {x: 5, y: 5}
   speed: 3
+  rotationSpeed: 45
+--- !u!95 &1720029834379334160
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384607647304639135}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7b59d926e772ea4b9ba7c3b53f1d89d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

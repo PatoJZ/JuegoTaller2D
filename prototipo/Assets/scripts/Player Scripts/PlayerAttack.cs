@@ -8,6 +8,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("Hitbox Ataque")]
     [SerializeField] private Transform controllerStroke;
     [SerializeField] private float radioStroke;
+    [SerializeField] public Transform controllerLimit;
+    [SerializeField] public float radioLimit;
+    [Header("Daño Ataque")]
     [SerializeField] public float hitDamageHacha;
     [SerializeField] public float hitDamageShovel;
     [SerializeField] public float hitDamage;
@@ -18,9 +21,11 @@ public class PlayerAttack : MonoBehaviour
     [Header("PowerUp")]
     public float multiplyForce;
     public float multiplySpeed;
+    public float multiplySpeedMove;
     public float multiplySpeedAttack;
     public enum Directions {HACHA,SHOVEL}
     public Directions weapon;
+    
     private PlayerControl playerControl;
     private Animator playerAnimator;
     // Update is called once per frame
@@ -35,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
     }
     public void TakeDamage(float damage, Vector2 position)
     {
+        animationIdle();
         playerControl.health -= damage;
         if (playerControl.health <= 0)
         {
@@ -45,7 +51,21 @@ public class PlayerAttack : MonoBehaviour
             //se le quitara control del player y dara invulnerabilidad
             StartCoroutine(OutOfControl());
             StartCoroutine(TimeOfInvulnerability());
-            playerControl.Bounce(playerControl.savePlace);
+            playerControl.Bounce(position);
+            ControllerSave.instance.KnowLife(playerControl.health);
+        }
+    }
+    private void animationIdle()
+    {
+        playerAnimator.SetBool("Attack", false);
+        switch (weapon)
+        {
+            case Directions.HACHA:
+                playerAnimator.SetTrigger("Idle");
+                break;
+            case Directions.SHOVEL:
+                playerAnimator.SetTrigger("Idle Shovel");
+                break;
         }
     }
     //se cargara la escena
@@ -75,9 +95,11 @@ public class PlayerAttack : MonoBehaviour
     }
     private IEnumerator MoreSpeed()
     {
+        playerAnimator.SetFloat("MultiplySpeedMove", multiplySpeedMove);
         playerControl.speed *= multiplySpeed;
         yield return new WaitForSeconds(timePowerUp);
         playerControl.speed /= multiplySpeed;
+        playerAnimator.SetFloat("MultiplySpeedMove", 1);
     }
     private IEnumerator MoreSpeedAttack()
     {
@@ -138,5 +160,6 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(controllerStroke.position, radioStroke);
+        Gizmos.DrawWireSphere(controllerLimit.position, radioLimit);
     }
 }

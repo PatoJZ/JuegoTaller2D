@@ -10,10 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8729985361439916597}
   - component: {fileID: 220346189371902021}
-  - component: {fileID: 6154810656465181414}
-  m_Layer: 0
+  - component: {fileID: 6220736847055658923}
+  - component: {fileID: 8472275924953047482}
+  - component: {fileID: 1022615229120992033}
+  - component: {fileID: 7984317947078952117}
+  - component: {fileID: 5162404613875296299}
+  m_Layer: 6
   m_Name: Rabano
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: -1789221907, guid: 4e922bdf34f6ece4a88f97a2f00b168e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,8 +89,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6154810656465181414
-BoxCollider2D:
+--- !u!95 &6220736847055658923
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202770148882125246}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67dbef6a77dd06442833924c83727f55, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &8472275924953047482
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,16 +142,72 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.005996704, y: -0.67763877}
+  m_Size: {x: 0.644722, y: 0.64472246}
+  m_Direction: 0
+--- !u!114 &1022615229120992033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202770148882125246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9826ca58238cd124ca4e43326d7ff60f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfEnemy: 2
+  chase: 1
+  tackle: 0
+  PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
+  distanciaDeteccion: 0
+  speedBounce: {x: 7, y: 7}
+  speed: 3
+  rotationSpeed: 45
+  direction: {x: 0, y: 0, z: 0}
+--- !u!114 &7984317947078952117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202770148882125246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a8a174c37f4ec4195483539f389d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfEnemy: 2
+  health: 3
+  damageAttack: 1
+  timeOutOfControl: 0.3
+  timeOfCharge: 2
+  bullet: {fileID: 0}
+--- !u!50 &5162404613875296299
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202770148882125246}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

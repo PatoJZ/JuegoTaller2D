@@ -29,6 +29,7 @@ public class ControllerHUD : MonoBehaviour
         }
         if (textHealth!=null)
         {
+            Debug.Log("Existe");
             textHealth.text = "Vidas=" + (ControllerSave.instance.life);
         }
     }

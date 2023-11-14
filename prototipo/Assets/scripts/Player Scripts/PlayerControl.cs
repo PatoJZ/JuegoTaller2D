@@ -10,8 +10,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] public float speed = 3f;
     [SerializeField] private Vector2 speedBounce;
     public bool canMove = false;
+    public bool canAttack = true;
     [Header("Posicion Jugador")]
     public Vector2 savePlace;
+    public Vector2 angulo_base;
     private Vector2 moveInput;
     private PlayerAttack playerAttack;
     private Rigidbody2D playerRb;
@@ -19,8 +21,8 @@ public class PlayerControl : MonoBehaviour
     BasicInteraction basicInteraction;
     void Start()
     {
-        //ControllerSave.instance.KnowLife(health);
-        //ControllerSave.instance.InitialPoint(0);
+        ControllerSave.instance.KnowLife(health);
+        ControllerSave.instance.InitialPoint(0);
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
@@ -63,21 +65,23 @@ public class PlayerControl : MonoBehaviour
         {
             moveInput = Vector2.zero;
         }
-        if (!playerAnimator.GetBool("Attack"))
+        if (!playerAnimator.GetBool("Attack") && Time.timeScale!=0)
         {
             if (moveX != 0 && canMove || moveY != 0 && canMove)
             {
                 savePlace = new Vector2(moveX, moveY);
             }
         }
-        if (!playerAnimator.GetBool("Attack") && Time.timeScale != 0)
+        if (canAttack && Time.timeScale != 0)
         {
+            
             //primero se cambiara arma y despues se atacara
             if (Input.GetKeyDown("c"))
             {
                 playerAttack.ChangeWeapon();
             }else if (Input.GetKeyDown("space"))
             {
+                canAttack = false;
                 playerAnimator.SetBool("Attack", true);
             }
         }
@@ -91,6 +95,11 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
+    public void CanAttack()
+    {
+        canAttack = true;
+        playerAnimator.SetBool("Attack", false);
+    }
     public void Bounce(Vector2 pointHit)
     {
         playerRb.velocity = new Vector2(-speedBounce.x*pointHit.x,-speedBounce.y*pointHit.y);
@@ -103,6 +112,10 @@ public class PlayerControl : MonoBehaviour
         {
             Animation(savePlace.x, savePlace.y);
         }
+        angulo_base = new Vector2(transform.position.x-playerAttack.radioLimit, transform.position.y);
+        // vector base = new vector2(miposicion.x - limitecirculo,x, lo mismo en y);
+        // vector enemigo = new Vector2(miposicion.x - posicionenemiga.x, lo mismo en y);
+        //Debug.Log("atacar es : "+canAttack);
     }
     private void FixedUpdate()
     {
@@ -119,7 +132,6 @@ public class PlayerControl : MonoBehaviour
         if (collision.CompareTag("Interaction"))
         {
             basicInteraction = collision.GetComponent<BasicInteraction>();
-            Debug.Log("hola");
         }
         
     }

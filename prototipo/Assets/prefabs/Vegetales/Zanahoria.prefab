@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4720771973826103831}
   - component: {fileID: 1948417269709161222}
   - component: {fileID: 5170318055160915923}
-  - component: {fileID: 3369566258043765313}
+  - component: {fileID: 6660621511112570578}
   - component: {fileID: -5653574575290231489}
   - component: {fileID: 7764892453284764704}
   - component: {fileID: 7610054393023116572}
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 7380074776516422051}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ab6b29321dd3a6c4891f06f8fea0782e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -119,8 +119,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7380074776516422051}
   m_CullTransparentMesh: 1
---- !u!61 &3369566258043765313
-BoxCollider2D:
+--- !u!70 &6660621511112570578
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,19 +151,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.024744987, y: -0.6351075}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.25139236, y: 0.69679165}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.031941652, y: -0.51558626}
+  m_Size: {x: 0.44371462, y: 0.84119344}
+  m_Direction: 0
 --- !u!50 &-5653574575290231489
 Rigidbody2D:
   serializedVersion: 4
@@ -203,10 +193,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9826ca58238cd124ca4e43326d7ff60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: 1
   chase: 1
+  tackle: 0
   PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
+  distanciaDeteccion: 0
   speedBounce: {x: 5, y: 5}
   speed: 3
+  rotationSpeed: 45
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &7610054393023116572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,5 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a8a174c37f4ec4195483539f389d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: 1
   health: 3
+  damageAttack: 1
   timeOutOfControl: 0.3
+  timeOfCharge: 0
+  bullet: {fileID: 42631877774361919, guid: 96d80c2e5d255af418ddaef48fb3ae2e, type: 3}

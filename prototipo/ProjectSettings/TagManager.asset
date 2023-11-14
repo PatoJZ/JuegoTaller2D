@@ -8,6 +8,7 @@ TagManager:
   - PJ
   - Interaction
   - Weapon
+  - Limit
   layers:
   - Default
   - TransparentFX
