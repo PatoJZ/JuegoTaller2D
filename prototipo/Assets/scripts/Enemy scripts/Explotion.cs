@@ -23,7 +23,7 @@ public class Explotion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PJ"))
         {
-            collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(5,collision.GetContact(0).normal);
+            collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(3,collision.GetContact(0).normal);
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {

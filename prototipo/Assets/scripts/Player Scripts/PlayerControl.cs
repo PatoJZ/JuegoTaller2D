@@ -76,7 +76,7 @@ public class PlayerControl : MonoBehaviour
         {
             
             //primero se cambiara arma y despues se atacara
-            if (Input.GetKeyDown("c"))
+            if (Input.GetKeyDown("n") || Input.GetKeyDown("m"))
             {
                 playerAttack.ChangeWeapon();
             }else if (Input.GetKeyDown("space"))

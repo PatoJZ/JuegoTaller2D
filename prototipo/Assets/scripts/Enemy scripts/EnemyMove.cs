@@ -50,7 +50,7 @@ public class EnemyMove : MonoBehaviour
     void Update()
     {
         enemyAnimator.SetBool("Chase", chase);
-        if (chase)
+        if (chase && GetComponent<EnemyAttack>().health>0)
         {
             switch (typeOfEnemy)
             {
@@ -131,6 +131,14 @@ public class EnemyMove : MonoBehaviour
                     break;
                 case Directions.EXPLOCION:
                     enemyRb.velocity = Vector2.zero;
+                    if (PlayerM.transform.position.x >= transform.position.x)
+                    {
+                        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    }
                     FollowPlayer(true);
 
                     break;
@@ -156,6 +164,12 @@ public class EnemyMove : MonoBehaviour
                 break;
             case Directions.EMBESTIDA:
                 if (!collision.gameObject.CompareTag("PJ")&& !enemyAnimator.GetBool("AttackAnimation"))
+                {
+                    EscapeObstacle(collision);
+                }
+                break;
+            case Directions.EXPLOCION:
+                if (!collision.gameObject.CompareTag("PJ") && !enemyAnimator.GetBool("AttackAnimation"))
                 {
                     EscapeObstacle(collision);
                 }

@@ -6,6 +6,8 @@ using TMPro;
 public class ControllerSave : MonoBehaviour
 {
     public static ControllerSave instance;
+    public enum Directions { HACHA, SHOVEL }
+    public Directions weapon;
     [SerializeField] public float point;
     [SerializeField] public float life;
     // Start is called before the first frame update
@@ -35,5 +37,20 @@ public class ControllerSave : MonoBehaviour
     public void InitialPoint(float initialPoint)
     {
         point = initialPoint;
+    }
+    public void KnowWeapon(int _weapon)
+    {
+        switch (_weapon)
+        {
+            case 1:
+                weapon = Directions.HACHA;
+                break;
+            case 2:
+                weapon = Directions.SHOVEL;
+                break;
+            case 3:
+
+                break;
+        }
     }
 }

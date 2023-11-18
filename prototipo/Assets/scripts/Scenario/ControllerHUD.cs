@@ -17,8 +17,14 @@ public class ControllerHUD : MonoBehaviour
     public TMP_Text npcDialogText;
     public TMP_Text npcName;
     public Image npcFace;
-    // Start is called before the first frame update
 
+    public Image hudWeapon;
+    private Animator hudWeaponAnimator;
+    // Start is called before the first frame update
+    private void Start()
+    {
+        hudWeaponAnimator = hudWeapon.GetComponent<Animator>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -61,4 +67,41 @@ public class ControllerHUD : MonoBehaviour
         npcFace.sprite = null;
         Time.timeScale = 1;
     }
+    public void ChangeWeapon(PlayerAttack playerAttack)
+    {
+        switch (playerAttack.weapon)
+        {
+            case PlayerAttack.Directions.HOE:
+                if (Input.GetKeyDown("n"))
+                {
+                    hudWeaponAnimator.SetTrigger("HoeToTools");
+                }
+                else if (Input.GetKeyDown("m"))
+                {
+                    hudWeaponAnimator.SetTrigger("HoeToShovel");
+                }
+                break;
+            case PlayerAttack.Directions.SHOVEL:
+                if (Input.GetKeyDown("n"))
+                {
+                    hudWeaponAnimator.SetTrigger("ShovelToHoe");
+                }
+                else if (Input.GetKeyDown("m"))
+                {
+                    hudWeaponAnimator.SetTrigger("ShovelToTools");
+                }
+                break;
+            case PlayerAttack.Directions.TOOLS:
+                if (Input.GetKeyDown("n"))
+                {
+                    hudWeaponAnimator.SetTrigger("ToolsToShovel");
+                }
+                else if (Input.GetKeyDown("m"))
+                {
+                    hudWeaponAnimator.SetTrigger("ToolsToHoe");
+                }
+                break;
+        }
+    }
+    
 }

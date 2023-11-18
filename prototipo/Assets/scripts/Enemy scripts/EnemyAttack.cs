@@ -26,9 +26,9 @@ public class EnemyAttack : MonoBehaviour
     public void TakeEnemyDamage(float damage, Vector2 position)
     {
         health -= damage;
+        
         StartCoroutine(OutOfControl());
         enemyMove.Bounce(position);
-        
         if (health <= 0)
         {
             ControllerSave.instance.point += 10;
@@ -38,12 +38,13 @@ public class EnemyAttack : MonoBehaviour
     public void animationDead()
     {
         enemyAnimator.SetTrigger("Dead");
+        FindObjectOfType<RoundManager>().EnemigoEliminado();
     }
     //Eliminacion del gameObject
     private void Dead()
     {
         Destroy(gameObject);
-        FindObjectOfType<RoundManager>().EnemigoEliminado();
+        //FindObjectOfType<RoundManager>().EnemigoEliminado();
     }
     //se cambia el booleano que deja avanzar al player 
     private IEnumerator OutOfControl()
@@ -58,6 +59,7 @@ public class EnemyAttack : MonoBehaviour
                 enemyMove.chase = false;
                 yield return new WaitForSeconds(timeOutOfControl);
                 enemyMove.chase = true;
+                rb.velocity = Vector2.zero;
                 break;
         }
     }
@@ -182,6 +184,7 @@ public class EnemyAttack : MonoBehaviour
     public void Explotion()
     {
         Instantiate(bullet,transform.position,transform.rotation);
+        FindObjectOfType<RoundManager>().EnemigoEliminado();
         Destroy(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -197,8 +200,12 @@ public class EnemyAttack : MonoBehaviour
 
                 break;
             case Directions.EXPLOCION:
-                enemyMove.chase = false;
-                AnimationAttackCauliflower();
+                if (collision.gameObject.CompareTag("PJ"))
+                {
+                    enemyMove.chase = false;
+                    AnimationAttackCauliflower();
+                }
+                
                 break;
         }
         switch (typeOfEnemy)
@@ -221,8 +228,9 @@ public class EnemyAttack : MonoBehaviour
             case Directions.CUERPO:
                 if (collision.gameObject.CompareTag("Weapon"))
                 {
-                    TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     AnimationDamagePotato();
+                    TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
+                    
                 }
                 break;
             case Directions.DISPARADOR:
@@ -237,15 +245,17 @@ public class EnemyAttack : MonoBehaviour
             case Directions.EMBESTIDA:
                 if (collision.gameObject.CompareTag("Weapon")&& (!enemyAnimator.GetBool("AttackAnimation")|| enemyAnimator.GetBool("Stun")))
                 {
-                    TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     AnimationDamageRadish();
+                    TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
+                    
                 }
                 break;
             case Directions.EXPLOCION:
                 if (collision.gameObject.CompareTag("Weapon"))
                 {
-                    TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     AnimationDamageCauliflower();
+                    TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
+                    
                 }
                 break;
         }

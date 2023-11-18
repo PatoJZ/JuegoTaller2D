@@ -407,7 +407,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Controles: \nMoverte con las flechas o con wasd\natacar con la tecla space\ninteractuar
-    con la tecla e\n"
+    con la tecla e\ncambiar de arma con las teclas n y m\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
   m_sharedMaterial: {fileID: 4680450504458305779, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}

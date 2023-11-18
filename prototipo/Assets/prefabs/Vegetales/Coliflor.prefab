@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5560840754119351520}
   m_Layer: 0
   m_Name: Coliflor
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: -248714990, guid: dbf2a154928555e419ee3a9b3ccd9b16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   typeOfEnemy: 3
   chase: 1
   tackle: 0
-  PlayerM: {fileID: 0}
+  PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
   distanciaDeteccion: 0
   speedBounce: {x: 5, y: 5}
   speed: 3

@@ -7,12 +7,14 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Hitbox Ataque")]
     [SerializeField] private Transform controllerStroke;
+    [SerializeField] private Transform controllerStrokeTwo;
     [SerializeField] private float radioStroke;
     [SerializeField] public Transform controllerLimit;
     [SerializeField] public float radioLimit;
     [Header("Daño Ataque")]
     [SerializeField] public float hitDamageHacha;
     [SerializeField] public float hitDamageShovel;
+    [SerializeField] public float hitDamageTools;
     [SerializeField] public float hitDamage;
     [Header("Tiempos")]
     public float timePowerUp;
@@ -23,16 +25,18 @@ public class PlayerAttack : MonoBehaviour
     public float multiplySpeed;
     public float multiplySpeedMove;
     public float multiplySpeedAttack;
-    public enum Directions {HACHA,SHOVEL}
+    public enum Directions {HOE,SHOVEL,TOOLS}
     public Directions weapon;
     
     private PlayerControl playerControl;
     private Animator playerAnimator;
+    private ControllerHUD controllerHUD;
     // Update is called once per frame
     private void Start()
     {
         playerControl = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
+        controllerHUD = FindObjectOfType<ControllerHUD>();
     }
     public void EndAttack()
     {
@@ -60,11 +64,14 @@ public class PlayerAttack : MonoBehaviour
         playerAnimator.SetBool("Attack", false);
         switch (weapon)
         {
-            case Directions.HACHA:
+            case Directions.HOE:
                 playerAnimator.SetTrigger("Idle");
                 break;
             case Directions.SHOVEL:
                 playerAnimator.SetTrigger("Idle Shovel");
+                break;
+            case Directions.TOOLS:
+                playerAnimator.SetTrigger("Idle Tools");
                 break;
         }
     }
@@ -124,19 +131,45 @@ public class PlayerAttack : MonoBehaviour
     }
     public void ChangeWeapon()
     {
-        
+        controllerHUD.ChangeWeapon(this);
         switch (weapon)
         {
-            case Directions.HACHA:
-                weapon = Directions.SHOVEL;
-                playerAnimator.SetTrigger("Idle Shovel");
+            case Directions.HOE:
+                if (Input.GetKeyDown("n"))
+                {
+                    weapon = Directions.TOOLS;
+                    animationIdle();
+                }
+                else if (Input.GetKeyDown("m"))
+                {
+                    weapon = Directions.SHOVEL;
+                    animationIdle();
+                }
             break;    
             case Directions.SHOVEL:
-                weapon = Directions.HACHA;
-                playerAnimator.SetTrigger("Idle");
-            break;
-            default:
-             break;
+                if (Input.GetKeyDown("n"))
+                {
+                    weapon = Directions.HOE;
+                    animationIdle();
+                }
+                else if (Input.GetKeyDown("m"))
+                {
+                    weapon = Directions.TOOLS;
+                    animationIdle();
+                }
+                break;
+            case Directions.TOOLS:
+                if (Input.GetKeyDown("n"))
+                {
+                    weapon = Directions.SHOVEL;
+                    animationIdle();
+                }
+                else if (Input.GetKeyDown("m"))
+                {
+                    weapon = Directions.HOE;
+                    animationIdle();
+                }
+                break;
 
         }
         SetHitDamage();
@@ -146,13 +179,14 @@ public class PlayerAttack : MonoBehaviour
 
         switch (weapon)
         {
-            case Directions.HACHA:
+            case Directions.HOE:
                 hitDamage = hitDamageHacha;
                 break;
             case Directions.SHOVEL:
                 hitDamage = hitDamageShovel;
                 break;
-            default:
+            case Directions.TOOLS:
+                hitDamage = hitDamageTools;
                 break;
         }
     }
@@ -161,5 +195,6 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(controllerStroke.position, radioStroke);
         Gizmos.DrawWireSphere(controllerLimit.position, radioLimit);
+        Gizmos.DrawWireSphere(controllerStrokeTwo.position, radioStroke);
     }
 }
