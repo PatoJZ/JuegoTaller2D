@@ -37,6 +37,7 @@ public class PlayerAttack : MonoBehaviour
         playerControl = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
         controllerHUD = FindObjectOfType<ControllerHUD>();
+       
     }
     public void EndAttack()
     {
@@ -97,6 +98,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator MoreForce()
     {
         hitDamage*=multiplyForce;
+        controllerHUD.ActivateForce(timePowerUp);
         yield return new WaitForSeconds(timePowerUp);
         hitDamage/=multiplyForce;
     }
@@ -104,6 +106,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimator.SetFloat("MultiplySpeedMove", multiplySpeedMove);
         playerControl.speed *= multiplySpeed;
+        controllerHUD.ActivateVelocity(timePowerUp);
         yield return new WaitForSeconds(timePowerUp);
         playerControl.speed /= multiplySpeed;
         playerAnimator.SetFloat("MultiplySpeedMove", 1);
@@ -111,6 +114,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator MoreSpeedAttack()
     {
         playerAnimator.SetFloat("MultiplySpeedAttack", multiplySpeedAttack);
+        controllerHUD.ActivateAttackVelocity(timePowerUp);
         yield return new WaitForSeconds(timePowerUp);
         playerAnimator.SetFloat("MultiplySpeedAttack", 1);
     }

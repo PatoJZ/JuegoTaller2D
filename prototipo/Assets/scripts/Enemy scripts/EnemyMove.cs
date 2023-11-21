@@ -29,19 +29,11 @@ public class EnemyMove : MonoBehaviour
     {
         enemyAnimator = GetComponent<Animator>();
         enemyRb=GetComponent<Rigidbody2D>();
-        StartCoroutine(Desactivated_colision());
     }
 
     public void Bounce(Vector2 pointHit)
     {
         enemyRb.velocity = new Vector2(-speedBounce.x * pointHit.x, -speedBounce.y*pointHit.y);
-    }
-    public IEnumerator Desactivated_colision()
-    {
-        Physics2D.IgnoreLayerCollision(8,6,false);
-        yield return new WaitForSeconds(0.1f);
-        Physics2D.IgnoreLayerCollision(8, 6, true);
-
     }
     public void RestartTime()
     {

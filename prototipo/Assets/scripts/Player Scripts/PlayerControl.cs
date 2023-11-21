@@ -33,6 +33,7 @@ public class PlayerControl : MonoBehaviour
     //cambiar de lado la escala
     void Animation(float x,float y)
     {
+        
         if (!playerAnimator.GetBool("Attack"))
         {
             playerAnimator.SetFloat("Horizontal", x);
