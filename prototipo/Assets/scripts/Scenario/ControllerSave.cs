@@ -27,7 +27,6 @@ public class ControllerSave : MonoBehaviour
     public void KnowLife(float _life)
     {
         life =_life;
-        Debug.Log("vida controller" + _life);
     }
     // agregar puntaje
     public void PlusPoint(float plusPoint)

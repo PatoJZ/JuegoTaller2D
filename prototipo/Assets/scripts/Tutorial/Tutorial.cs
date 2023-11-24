@@ -33,6 +33,9 @@ public class Tutorial : MonoBehaviour
     private Animator animatorKeyN;
     public GameObject KeyE;
     private Animator animatorKeyE;
+    public GameObject KeyEsc;
+    public GameObject pause;
+    private Animator animatorKeyEsc;
 
     [Header("Fondo")]
     
@@ -73,6 +76,7 @@ public class Tutorial : MonoBehaviour
         animatorKeyM = KeyM.GetComponent<Animator>();
         animatorKeySpace = KeySpace.GetComponent<Animator>();
         animatorKeyE = KeyE.GetComponent<Animator>();
+        animatorKeyEsc = KeyEsc.GetComponent<Animator>();
         animatorKeyA.SetTrigger("A");
         animatorKeyD.SetTrigger("D");
         animatorKeyS.SetTrigger("S");
@@ -85,6 +89,7 @@ public class Tutorial : MonoBehaviour
         animatorKeyRight.SetTrigger("Right");
         animatorKeySpace.SetTrigger("Space");
         animatorKeyE.SetTrigger("E");
+        animatorKeyEsc.SetTrigger("Esc");
         //****************HUD****************
         hudWeaponAnimator = hudWeapon.GetComponent<Animator>();       
         //***************Player****************
@@ -96,6 +101,7 @@ public class Tutorial : MonoBehaviour
         StartCoroutine(HoeToShovel());
         playerSeeSignAnimator = playerSeeSign.GetComponent<Animator>();
         StartCoroutine(SeeSignDown());
+        StartCoroutine(PressEscActivate());
         
         
     }
@@ -111,6 +117,12 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         animatorKeyE.SetBool("Hold", false);
     }
+    public IEnumerator Esc()
+    {
+        animatorKeyEsc.SetBool("Hold", true);
+        yield return new WaitForSeconds(0.1f);
+        animatorKeyEsc.SetBool("Hold", false);
+    }
 
     public IEnumerator N()
     {
@@ -118,6 +130,23 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         animatorKeyN.SetBool("Hold", false);
     }
+    public IEnumerator PressEscActivate()
+    {
+
+        yield return new WaitForSeconds(1f);
+        pause.SetActive(true);
+        StartCoroutine(Esc());
+        StartCoroutine(PressEscDesactivate());
+    }
+    public IEnumerator PressEscDesactivate()
+    {
+
+        yield return new WaitForSeconds(1f);
+        pause.SetActive(false);
+        StartCoroutine(Esc());
+        StartCoroutine(PressEscActivate());
+    }
+
     public IEnumerator PressEBad()
     {
         

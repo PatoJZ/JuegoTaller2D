@@ -18,8 +18,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] public float hitDamage;
     [Header("Tiempos")]
     public float timePowerUp;
+    public float timeHealhRecuperate;
     [SerializeField] private float timeOutOfControl;
-    [SerializeField] private float timeOutOfInvulnerability;
+    [SerializeField] public float timeOutOfInvulnerability;
     [Header("PowerUp")]
     public float multiplyForce;
     public float multiplySpeed;
@@ -27,7 +28,8 @@ public class PlayerAttack : MonoBehaviour
     public float multiplySpeedAttack;
     public enum Directions {HOE,SHOVEL,TOOLS}
     public Directions weapon;
-    
+
+    private float maxHealth = 12;
     private PlayerControl playerControl;
     private Animator playerAnimator;
     private ControllerHUD controllerHUD;
@@ -37,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
         playerControl = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
         controllerHUD = FindObjectOfType<ControllerHUD>();
-       
+        
     }
     public void EndAttack()
     {
@@ -47,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
     {
         animationIdle();
         playerControl.health -= damage;
+        StopAllCoroutines();
         if (playerControl.health <= 0)
         {
             Dead();
@@ -54,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             //se le quitara control del player y dara invulnerabilidad
+            StartCoroutine(StartHealthRecovery());
             StartCoroutine(OutOfControl());
             StartCoroutine(TimeOfInvulnerability());
             playerControl.Bounce(position);
@@ -81,6 +85,25 @@ public class PlayerAttack : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+    private IEnumerator StartHealthRecovery()
+    {
+        yield return new WaitForSeconds(timeHealhRecuperate);
+        StartCoroutine(HealthRecovery());
+    }
+    private IEnumerator HealthRecovery()
+    {
+        if (maxHealth>playerControl.health)
+        {
+            playerControl.health += 1;
+            ControllerSave.instance.life = playerControl.health;
+        }
+        else
+        {
+            StopAllCoroutines();
+        }
+        yield return new WaitForSeconds(1);
+        StartCoroutine(HealthRecovery());
+    }
     //se quitara el control del player
     private IEnumerator OutOfControl()
     {
@@ -92,7 +115,9 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator TimeOfInvulnerability()
     {
         Physics2D.IgnoreLayerCollision(7,6,true);
+        playerControl.invulnerability = true;
         yield return new WaitForSeconds(timeOutOfControl*5);
+        playerControl.invulnerability = false;
         Physics2D.IgnoreLayerCollision(7, 6,false);
     }
     private IEnumerator MoreForce()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class ControllerHUD : MonoBehaviour
@@ -11,11 +12,11 @@ public class ControllerHUD : MonoBehaviour
     public Image[] playerHearts;
     public Sprite[] heartStatus;
     public int currentHeart;
-    private int hp;
+    [SerializeField]private int hp;
 
 
-    static int minhearts=1;
-    static int maxhearts=4;
+    static int minhearts = 1;
+    static int maxhearts = 4;
 
 
     public TMP_Text textPoint;
@@ -23,18 +24,21 @@ public class ControllerHUD : MonoBehaviour
     [Header("Power up")]
     public GameObject Velocity;
     public Slider VelocityTimer;
-    private bool timeActivateVelocity=false;
+    private bool timeActivateVelocity = false;
     private float timerVelocity;
 
     public GameObject force;
     public Slider forceTimer;
     private bool timeActivateForce = false;
-    public float timerForce;
+    private float timerForce;
 
     public GameObject attackVelocity;
     public Slider attackVelocityTimer;
     private bool timeActivateAttackVelocity = false;
     private float timerAttackVelocity;
+
+    [Header("Pause")]
+    public GameObject Pause;
 
     [Header("Dialog Box")]
     public GameObject dialogBox;
@@ -50,9 +54,7 @@ public class ControllerHUD : MonoBehaviour
     public Image hudWeapon;
     private Animator hudWeaponAnimator;
 
-    [Header("Pause")]
-    public GameObject pause;
-    public int[] butom;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -62,8 +64,7 @@ public class ControllerHUD : MonoBehaviour
     void Update()
     {
         currentHeart = Mathf.Clamp(currentHeart, minhearts, maxhearts);
-        hp = Mathf.Clamp(Mathf.RoundToInt(ControllerSave.instance.life), 1, currentHeart*4);
-        Debug.Log(currentHeart);
+        hp = Mathf.Clamp(Mathf.RoundToInt(ControllerSave.instance.life), 1, currentHeart * 4);
         UpdateCurrentHearts();
         if (timeActivateVelocity)
         {
@@ -78,20 +79,33 @@ public class ControllerHUD : MonoBehaviour
             ChangeCountAttackVelocity();
         }
         //Cambiar texto
-        if (textPoint!=null)
-        {
-            textPoint.text = "Puntaje total=" + (ControllerSave.instance.point);
-        }
-        
-        if (Input.GetKey(KeyCode.Escape) && Time.timeScale!=0)
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !Pause.activeSelf)
         {
             Time.timeScale = 0;
-        }else if (Input.GetKey(KeyCode.Escape) && Time.timeScale == 0)
+            Pause.SetActive(true);
+
+        } else if (Input.GetKeyDown(KeyCode.Escape) && Pause.activeSelf)
         {
             Time.timeScale = 1;
+            Pause.SetActive(false);
         }
-        
+
     }
+    public void Continue()
+    {
+        Debug.Log("Click");
+        Time.timeScale = 1;
+        Pause.SetActive(false);
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    } 
     private void UpdateCurrentHearts()
     {
         int aux = hp;
@@ -109,6 +123,12 @@ public class ControllerHUD : MonoBehaviour
                 playerHearts[i].enabled = false;
             }
         }
+    }
+    public void UpdateCurrentHP(int i)
+    {
+        hp += i;
+        hp = Mathf.Clamp(hp, 0, currentHeart * 4);
+        UpdateCurrentHearts();
     }
     private Sprite GetHeartStatus(int x)
     {

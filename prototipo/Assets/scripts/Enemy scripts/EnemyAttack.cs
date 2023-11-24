@@ -195,6 +195,7 @@ public class EnemyAttack : MonoBehaviour
             default:
                 if (collision.gameObject.CompareTag("PJ"))
                 {
+                    
                     collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(damageAttack, collision.GetContact(0).normal);
                 }
 

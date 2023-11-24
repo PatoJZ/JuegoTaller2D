@@ -7,10 +7,12 @@ public class PlayerControl : MonoBehaviour
 {
     [Header("Movimientos")]
     [SerializeField] public float health = 3;
+    
     [SerializeField] public float speed = 3f;
     [SerializeField] private Vector2 speedBounce;
     public bool canMove = false;
     public bool canAttack = true;
+    public bool invulnerability = false;
     [Header("Posicion Jugador")]
     public Vector2 savePlace;
     public Vector2 angulo_base;
@@ -18,9 +20,11 @@ public class PlayerControl : MonoBehaviour
     private PlayerAttack playerAttack;
     private Rigidbody2D playerRb;
     private Animator playerAnimator;
+    private Material material;
     BasicInteraction basicInteraction;
     void Start()
     {
+        health = Mathf.Clamp(health, 2, 12);
         ControllerSave.instance.KnowLife(health);
         ControllerSave.instance.InitialPoint(0);
         playerRb = GetComponent<Rigidbody2D>();
@@ -29,6 +33,7 @@ public class PlayerControl : MonoBehaviour
         //Setear cosas
         playerAttack.SetHitDamage();
         savePlace=new Vector2(0,-1);
+        material = GetComponent<Renderer>().material;
     }
     //cambiar de lado la escala
     void Animation(float x,float y)
@@ -105,9 +110,24 @@ public class PlayerControl : MonoBehaviour
     {
         playerRb.velocity = new Vector2(-speedBounce.x*pointHit.x,-speedBounce.y*pointHit.y);
     }
+    public void HitAnimation()
+    {
+        if (invulnerability)
+        {
+            // Reduce el temporizador de invulnerabilidad
+
+            // Cambia el color del material mientras está en estado de invulnerabilidad
+            material.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time * 5f, 1f));
+        }
+        else
+        {
+            material.color = Color.white;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
+        HitAnimation();
         Inputs();
         if (Time.timeScale!=0)
         {

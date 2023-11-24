@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7c1c9e9cfe63f7448d3079e6a171d2a
+guid: 139f7df204742a34a8e83fab38017318
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_0
+      name: RuthCarmona_Attack_Tools (1)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f3e0cbe17fb7b643b8189ac87f3c5c7
-      internalID: -1729903166
+      spriteID: 96f96a3b6145cb94cbcf7be01c736def
+      internalID: 1376139614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_1
+      name: RuthCarmona_Attack_Tools (1)_1
       rect:
         serializedVersion: 2
         x: 52
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2c69560e269e754b9b667e4b6f10c48
-      internalID: -1692814416
+      spriteID: d0c05a31f02d1be4ba8bdeff68f8b832
+      internalID: 1583810695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_2
+      name: RuthCarmona_Attack_Tools (1)_2
       rect:
         serializedVersion: 2
         x: 104
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7c3be154cd18d844ab12c8d085bd066
-      internalID: -1850251741
+      spriteID: 6cb8fc4d5333f8248a2578ebe4c0f77d
+      internalID: 678560549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_3
+      name: RuthCarmona_Attack_Tools (1)_3
       rect:
         serializedVersion: 2
         x: 0
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cbfdadd9e04fa048a83bd0f72f64680
-      internalID: -2010578655
+      spriteID: 2ebe672440fd1a74188c868ce43cc3ca
+      internalID: -2107587467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_4
+      name: RuthCarmona_Attack_Tools (1)_4
       rect:
         serializedVersion: 2
         x: 52
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec72f3a31ca9e0a4bb704c340d3030b2
-      internalID: -648856992
+      spriteID: 8172263c7096b9448bf1aa30855a5e31
+      internalID: -1772575913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_5
+      name: RuthCarmona_Attack_Tools (1)_5
       rect:
         serializedVersion: 2
         x: 104
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 331e6f97f580f74429f4a2d2738a2f66
-      internalID: 77639109
+      spriteID: 93091359d33d2d8459a230b8c8f69fb3
+      internalID: -934209787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_6
+      name: RuthCarmona_Attack_Tools (1)_6
       rect:
         serializedVersion: 2
         x: 0
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65a7e12f7551dda478a7bf9276a46937
-      internalID: 730268589
+      spriteID: fff50dbcdb22e7149a7c4071564ff41f
+      internalID: 395067830
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_7
+      name: RuthCarmona_Attack_Tools (1)_7
       rect:
         serializedVersion: 2
         x: 52
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c336f578e8b2e714d9ef46660aaab0a2
-      internalID: -883212677
+      spriteID: cc2218db1e504d945a8a44745419f79a
+      internalID: 457569993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_8
+      name: RuthCarmona_Attack_Tools (1)_8
       rect:
         serializedVersion: 2
         x: 104
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50e149f662b4cfb4abc606762288e97f
-      internalID: 930514991
+      spriteID: a459735759ad3f247b66091a2033f4c6
+      internalID: 885269678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_9
+      name: RuthCarmona_Attack_Tools (1)_9
       rect:
         serializedVersion: 2
         x: 0
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c608c0445eb038439121a42291e1312
-      internalID: 248038201
+      spriteID: 4853c992efa76414f8e6c7f089b88488
+      internalID: 189183473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_10
+      name: RuthCarmona_Attack_Tools (1)_10
       rect:
         serializedVersion: 2
         x: 52
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03c510a12b789fa43b09a8313d2ad675
-      internalID: 550462726
+      spriteID: c35c973657a21d84fb7ecce3a6fcff0b
+      internalID: -508752072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_11
+      name: RuthCarmona_Attack_Tools (1)_11
       rect:
         serializedVersion: 2
         x: 104
@@ -355,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bb2224d5ffa8e4408b150017573e990
-      internalID: 1756637410
+      spriteID: 0390aaf7a45e5a745b161700f02d0d8f
+      internalID: 749281812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_12
+      name: RuthCarmona_Attack_Tools (1)_12
       rect:
         serializedVersion: 2
         x: 0
@@ -376,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e34000586b1d5914aa743d13b20aac51
-      internalID: 1900797593
+      spriteID: b9f4028995e5a9b40ab6572976db94ae
+      internalID: -1831670927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_13
+      name: RuthCarmona_Attack_Tools (1)_13
       rect:
         serializedVersion: 2
         x: 52
@@ -397,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 180bb2e133e55354b8229ff8fd47b9ee
-      internalID: -1020052330
+      spriteID: 1dd3ad7b699b39047943c1e99d913353
+      internalID: 1753080289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_14
+      name: RuthCarmona_Attack_Tools (1)_14
       rect:
         serializedVersion: 2
         x: 104
@@ -418,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6dc153c8f5c37ca4bba31e792a923957
-      internalID: -848688484
+      spriteID: aad1804e1dfb1ef4cbbfc722e733f301
+      internalID: -1223835375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_15
+      name: RuthCarmona_Attack_Tools (1)_15
       rect:
         serializedVersion: 2
         x: 0
@@ -439,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcf264ab76f8cc949ad9b2add9238ffa
-      internalID: -1873346034
+      spriteID: 42b7ef2a9808ff54db5fe1463f176d05
+      internalID: 1278343751
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_16
+      name: RuthCarmona_Attack_Tools (1)_16
       rect:
         serializedVersion: 2
         x: 52
@@ -460,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dfc15a6f5919a247af2b3ad1072f5a0
-      internalID: -1301673896
+      spriteID: 1335a5f16dd10af44b180ed3c28f0158
+      internalID: 1892881907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_17
+      name: RuthCarmona_Attack_Tools (1)_17
       rect:
         serializedVersion: 2
         x: 104
@@ -481,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32da21b0b2faea04a8182d0f86493d21
-      internalID: -1725747434
+      spriteID: 3dea9708bda2b42478efc0aebef3b860
+      internalID: 375747412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_18
+      name: RuthCarmona_Attack_Tools (1)_18
       rect:
         serializedVersion: 2
         x: 0
@@ -502,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4676606caaa890c4f8b9284630aeabae
-      internalID: 1913921174
+      spriteID: 46c8f697d3de18f4daa00c582520fd9a
+      internalID: 1098446730
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_19
+      name: RuthCarmona_Attack_Tools (1)_19
       rect:
         serializedVersion: 2
         x: 52
@@ -523,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45558b89d1f869d4b8433ddbcd8c613c
-      internalID: -827801878
+      spriteID: 6faa421858ba2984bb0d290bd7c5d45b
+      internalID: -1476645431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_20
+      name: RuthCarmona_Attack_Tools (1)_20
       rect:
         serializedVersion: 2
         x: 104
@@ -544,14 +544,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc9dea9149209e6468050bdae7942a65
-      internalID: -1548289747
+      spriteID: 75b18c7f9438a0a4c9bd56d2b026fab1
+      internalID: -727275163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_21
+      name: RuthCarmona_Attack_Tools (1)_21
       rect:
         serializedVersion: 2
         x: 0
@@ -565,14 +565,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e80667b4bc4725f41ad617d854bd5d1a
-      internalID: -660806947
+      spriteID: b660af241ce74ac42bf0253cf1e7e079
+      internalID: 145861259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_22
+      name: RuthCarmona_Attack_Tools (1)_22
       rect:
         serializedVersion: 2
         x: 52
@@ -586,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5fbe9089ee562945ab5fccb4730ed4a
-      internalID: -1996235744
+      spriteID: d39c2d98012bad044a97fe3539519576
+      internalID: -2042377842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RuthCarmona_Attack_Tools_23
+      name: RuthCarmona_Attack_Tools (1)_23
       rect:
         serializedVersion: 2
         x: 104
@@ -607,8 +607,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e651a179f16cc54b84813d4182dcabb
-      internalID: -473792777
+      spriteID: f0473f9a5f293344e8f2cb567c43b7ac
+      internalID: 1337320503
       vertices: []
       indices: 
       edges: []
@@ -624,30 +624,30 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RuthCarmona_Attack_Tools_0: -1729903166
-      RuthCarmona_Attack_Tools_1: -1692814416
-      RuthCarmona_Attack_Tools_10: 550462726
-      RuthCarmona_Attack_Tools_11: 1756637410
-      RuthCarmona_Attack_Tools_12: 1900797593
-      RuthCarmona_Attack_Tools_13: -1020052330
-      RuthCarmona_Attack_Tools_14: -848688484
-      RuthCarmona_Attack_Tools_15: -1873346034
-      RuthCarmona_Attack_Tools_16: -1301673896
-      RuthCarmona_Attack_Tools_17: -1725747434
-      RuthCarmona_Attack_Tools_18: 1913921174
-      RuthCarmona_Attack_Tools_19: -827801878
-      RuthCarmona_Attack_Tools_2: -1850251741
-      RuthCarmona_Attack_Tools_20: -1548289747
-      RuthCarmona_Attack_Tools_21: -660806947
-      RuthCarmona_Attack_Tools_22: -1996235744
-      RuthCarmona_Attack_Tools_23: -473792777
-      RuthCarmona_Attack_Tools_3: -2010578655
-      RuthCarmona_Attack_Tools_4: -648856992
-      RuthCarmona_Attack_Tools_5: 77639109
-      RuthCarmona_Attack_Tools_6: 730268589
-      RuthCarmona_Attack_Tools_7: -883212677
-      RuthCarmona_Attack_Tools_8: 930514991
-      RuthCarmona_Attack_Tools_9: 248038201
+      RuthCarmona_Attack_Tools (1)_0: 1376139614
+      RuthCarmona_Attack_Tools (1)_1: 1583810695
+      RuthCarmona_Attack_Tools (1)_10: -508752072
+      RuthCarmona_Attack_Tools (1)_11: 749281812
+      RuthCarmona_Attack_Tools (1)_12: -1831670927
+      RuthCarmona_Attack_Tools (1)_13: 1753080289
+      RuthCarmona_Attack_Tools (1)_14: -1223835375
+      RuthCarmona_Attack_Tools (1)_15: 1278343751
+      RuthCarmona_Attack_Tools (1)_16: 1892881907
+      RuthCarmona_Attack_Tools (1)_17: 375747412
+      RuthCarmona_Attack_Tools (1)_18: 1098446730
+      RuthCarmona_Attack_Tools (1)_19: -1476645431
+      RuthCarmona_Attack_Tools (1)_2: 678560549
+      RuthCarmona_Attack_Tools (1)_20: -727275163
+      RuthCarmona_Attack_Tools (1)_21: 145861259
+      RuthCarmona_Attack_Tools (1)_22: -2042377842
+      RuthCarmona_Attack_Tools (1)_23: 1337320503
+      RuthCarmona_Attack_Tools (1)_3: -2107587467
+      RuthCarmona_Attack_Tools (1)_4: -1772575913
+      RuthCarmona_Attack_Tools (1)_5: -934209787
+      RuthCarmona_Attack_Tools (1)_6: 395067830
+      RuthCarmona_Attack_Tools (1)_7: 457569993
+      RuthCarmona_Attack_Tools (1)_8: 885269678
+      RuthCarmona_Attack_Tools (1)_9: 189183473
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

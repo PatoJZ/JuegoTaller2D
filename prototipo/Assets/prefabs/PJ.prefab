@@ -303,11 +303,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fde77a6e1fb244d8c21bad0451a83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 7
+  health: 12
   speed: 5
   speedBounce: {x: 5, y: 5}
   canMove: 1
   canAttack: 1
+  invulnerability: 0
   savePlace: {x: 0, y: -1}
   angulo_base: {x: 0, y: 0}
 --- !u!114 &1688861401687945569
@@ -332,11 +333,12 @@ MonoBehaviour:
   hitDamageTools: 0.5
   hitDamage: 1
   timePowerUp: 5
+  timeHealhRecuperate: 10
   timeOutOfControl: 0.5
   timeOutOfInvulnerability: 2
   multiplyForce: 3
   multiplySpeed: 2
-  multiplySpeedMove: 0
+  multiplySpeedMove: 2
   multiplySpeedAttack: 2
   weapon: 0
 --- !u!61 &1976050671336317190
