@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -16,11 +18,18 @@ public class EnemyAttack : MonoBehaviour
     private Animator enemyAnimator;
     private Rigidbody2D rb;
     public GameObject bullet;
+    public Light2D light;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         enemyAnimator = GetComponent<Animator>();
         enemyMove = GetComponent<EnemyMove>();
+        
+        if (light!=null)
+        {
+            light.intensity = 0;
+        }
+        
     }
     // quitar vida del enemigo donde se pide el daño y la posicion de enpuje
     public void TakeEnemyDamage(float damage, Vector2 position)
@@ -44,7 +53,12 @@ public class EnemyAttack : MonoBehaviour
     private void Dead()
     {
         Destroy(gameObject);
-        //FindObjectOfType<RoundManager>().EnemigoEliminado();
+        FindObjectOfType<RoundManager>().EnemigoEliminado();
+    }
+    public void DeadForZone()
+    {
+        Destroy(gameObject);
+        FindObjectOfType<RoundManager>().EnemigoEliminadoPorZona();
     }
     //se cambia el booleano que deja avanzar al player 
     private IEnumerator OutOfControl()
@@ -177,8 +191,20 @@ public class EnemyAttack : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Attack");
     }
+    public void IncrimateLight()
+    {
+        light.intensity = 0.2f;
+        light.shapeLightFalloffSize += 0.5f;
+    }
+    public void IncrimateLight2()
+    {
+        light.intensity += 0.2f;
+        light.shapeLightFalloffSize += 0.5f;
+    }
     private void AnimationDamageCauliflower()
     {
+        light.intensity = 0;
+        light.shapeLightFalloffSize = 0.5f;
         enemyAnimator.SetTrigger("Damage");
     }
     public void Explotion()

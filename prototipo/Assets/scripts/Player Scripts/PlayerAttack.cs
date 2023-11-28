@@ -36,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
     public enum Directions {HOE,SHOVEL,TOOLS}
     public Directions weapon;
 
+    public int zone = 0;
     private List<string> nameItem = new List<string>();
     private List<Sprite>  imageItem = new List<Sprite>();
     private float maxHealth = 12;

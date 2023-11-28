@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,9 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a8a174c37f4ec4195483539f389d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: 0
   health: 3
   damageAttack: 1
   timeOutOfControl: 0.3
+  timeOfCharge: 0
+  bullet: {fileID: 0}
 --- !u!114 &5571846955667278448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,10 +193,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfEnemy: 0
   chase: 1
+  tackle: 0
   PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
+  distanciaDeteccion: 0
   speedBounce: {x: 5, y: 5}
   speed: 3
   rotationSpeed: 45
+  direction: {x: 0, y: 0, z: 0}
 --- !u!95 &1720029834379334160
 Animator:
   serializedVersion: 5

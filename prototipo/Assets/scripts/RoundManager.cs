@@ -35,7 +35,7 @@ public class RoundManager : MonoBehaviour
         {
             GenerarEnemigos();
         }
-
+        Debug.Log(enemigosGenerados);
         if (enemigosGenerados >= enemigosPorRonda)
         {
             Generacion = false;
@@ -81,6 +81,11 @@ public class RoundManager : MonoBehaviour
             enemigosPorRonda += 4;
             ComenzarNuevaRonda();
         }
+    }
+    public void EnemigoEliminadoPorZona()
+    {
+        enemigosGenerados--;
+        Generacion = true;
     }
 
     private void ActualizarTextos()

@@ -9,6 +9,7 @@ public class EntitySpawner : MonoBehaviour
     public GameObject Player;
     public float radioSpawn = 5f; // Radio en el cual se generará la entidad.
     public float tiempoEspera = 3f; // Tiempo de espera entre generaciones.
+    public int zone;
     private bool jugadorDentroDelRadio = false;
     private float tiempoUltimaGeneracion = 0f;
 
@@ -77,7 +78,7 @@ public class EntitySpawner : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.transform.GetComponent<EnemyMove>().PlayerM = Player;
-
+            collision.transform.GetComponent<EnemyMove>().zone = zone;
         }
     }
 

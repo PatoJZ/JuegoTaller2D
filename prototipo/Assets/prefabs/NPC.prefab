@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,8 +207,12 @@ MonoBehaviour:
   - hola
   - soy Homelo Chino
   - Soy como homelo, pero sin estal en el plan del plototipo
+  dialogEndMisision: []
   npcName: Homelo
   npcFace: {fileID: 21300000, guid: 2d7b6b5c539637f49b0d8db1faf54b19, type: 3}
+  itemNeed: 
+  itemGive: 
+  imageItemGive: {fileID: 0}
 --- !u!58 &2838277521778790203
 CircleCollider2D:
   m_ObjectHideFlags: 0

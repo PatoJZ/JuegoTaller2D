@@ -179,7 +179,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -264,7 +264,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1844,7 +1844,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3916,7 +3916,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5990,7 +5990,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6426,6 +6426,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1590873898}
+  minPosition: []
+  maxPosition: []
 --- !u!1 &575881018
 GameObject:
   m_ObjectHideFlags: 0
@@ -6627,10 +6629,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9826ca58238cd124ca4e43326d7ff60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: 0
   chase: 1
+  tackle: 0
   PlayerM: {fileID: 1590873898}
+  distanciaDeteccion: 0
   speedBounce: {x: 2, y: 0}
   speed: 3
+  rotationSpeed: 45
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &999505503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6643,8 +6650,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a8a174c37f4ec4195483539f389d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: 0
   health: 3
+  damageAttack: 0
   timeOutOfControl: 1
+  timeOfCharge: 0
+  bullet: {fileID: 0}
 --- !u!1 &1031926439
 GameObject:
   m_ObjectHideFlags: 0
@@ -6974,6 +6985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roundManager: {fileID: 1583632024}
   entidadPrefab: {fileID: 7635452841567026024, guid: 7894ee38e5b06dc42b2571b50d90a35d, type: 3}
+  Player: {fileID: 0}
   radioSpawn: 5
   tiempoEspera: 3
 --- !u!4 &1657564852
@@ -7058,10 +7070,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fde77a6e1fb244d8c21bad0451a83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   speed: 5
   speedBounce: {x: 0, y: 0}
   canMove: 1
+  canAttack: 1
+  invulnerability: 0
   savePlace: {x: 0, y: 0}
+  angulo_base: {x: 0, y: 0}
 --- !u!114 &1844666267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7075,10 +7091,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerStroke: {fileID: 40756816}
+  controllerStrokeTwo: {fileID: 0}
   radioStroke: 0.65
+  controllerLimit: {fileID: 0}
+  radioLimit: 0
+  hitDamageHacha: 0
+  hitDamageShovel: 0
+  hitDamageTools: 0
   hitDamage: 1
-  timeattack: 0.2
-  prueba: 1
+  timePowerUp: 0
+  timeHealhRecuperate: 0
+  timeOutOfControl: 0
+  timeOutOfInvulnerability: 0
+  multiplyForce: 0
+  multiplySpeed: 0
+  multiplySpeedMove: 0
+  multiplySpeedAttack: 0
+  weapon: 0
 --- !u!1001 &1021211100002835114
 PrefabInstance:
   m_ObjectHideFlags: 0

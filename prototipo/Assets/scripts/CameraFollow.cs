@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
     [Header("Medidas de la sala")]
     public Vector2[] minPosition;
     public Vector2[] maxPosition;
-    int i = 0;
+    public int i = 0;
 
     // Update is called once per frame
     void Update()
@@ -25,5 +25,6 @@ public class CameraFollow : MonoBehaviour
     public void ChangeZone(int x)
     {
         i = x;
+        Target.GetComponent<PlayerAttack>().zone = i;
     }
 }

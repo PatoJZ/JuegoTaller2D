@@ -21,12 +21,15 @@ public class EnemyMove : MonoBehaviour
     private bool limit=false;
     private float angle = 0.0f;
     public Vector3 direction;
+    public int zone;
     private Rigidbody2D enemyRb;
+    private EnemyAttack enemyAttack;
     private Animator enemyAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyAttack=GetComponent<EnemyAttack>();
         enemyAnimator = GetComponent<Animator>();
         enemyRb=GetComponent<Rigidbody2D>();
     }
@@ -42,6 +45,10 @@ public class EnemyMove : MonoBehaviour
     void Update()
     {
         enemyAnimator.SetBool("Chase", chase);
+        if (PlayerM.GetComponent<PlayerAttack>().zone!=zone)
+        {
+            enemyAttack.DeadForZone();
+        }
         if (chase && GetComponent<EnemyAttack>().health>0)
         {
             switch (typeOfEnemy)
