@@ -6,22 +6,29 @@ using UnityEngine.SceneManagement;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Hitbox Ataque")]
+    
     [SerializeField] private Transform controllerStroke;
     [SerializeField] private Transform controllerStrokeTwo;
     [SerializeField] private float radioStroke;
     [SerializeField] public Transform controllerLimit;
     [SerializeField] public float radioLimit;
+    
     [Header("Daño Ataque")]
+    
     [SerializeField] public float hitDamageHacha;
     [SerializeField] public float hitDamageShovel;
     [SerializeField] public float hitDamageTools;
     [SerializeField] public float hitDamage;
+    
     [Header("Tiempos")]
+    
     public float timePowerUp;
     public float timeHealhRecuperate;
     [SerializeField] private float timeOutOfControl;
     [SerializeField] public float timeOutOfInvulnerability;
+    
     [Header("PowerUp")]
+    
     public float multiplyForce;
     public float multiplySpeed;
     public float multiplySpeedMove;
@@ -29,6 +36,8 @@ public class PlayerAttack : MonoBehaviour
     public enum Directions {HOE,SHOVEL,TOOLS}
     public Directions weapon;
 
+    private List<string> nameItem = new List<string>();
+    private List<Sprite>  imageItem = new List<Sprite>();
     private float maxHealth = 12;
     private PlayerControl playerControl;
     private Animator playerAnimator;
@@ -39,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
         playerControl = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
         controllerHUD = FindObjectOfType<ControllerHUD>();
-        
+        controllerHUD.UpdateItem(imageItem);
     }
     public void EndAttack()
     {
@@ -49,7 +58,8 @@ public class PlayerAttack : MonoBehaviour
     {
         animationIdle();
         playerControl.health -= damage;
-        StopAllCoroutines();
+        StopCoroutine(StartHealthRecovery());
+        //StopAllCoroutines();
         if (playerControl.health <= 0)
         {
             Dead();
@@ -219,6 +229,29 @@ public class PlayerAttack : MonoBehaviour
                 break;
         }
     }
+    public void saveItem(string a, Sprite b)
+    {
+        nameItem.Add(a);
+        imageItem.Add(b);
+        controllerHUD.UpdateItem(imageItem);
+    }
+    public bool isItem(string name,string keyName,Sprite items)
+    {
+        int i=0;
+        foreach(string a in nameItem)
+        {
+            if (a==name || keyName==a)
+            {
+                nameItem[i] = keyName;
+                imageItem[i] = items;
+                controllerHUD.UpdateItem(imageItem);
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

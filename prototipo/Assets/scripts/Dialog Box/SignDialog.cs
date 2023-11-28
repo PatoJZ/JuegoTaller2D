@@ -64,12 +64,19 @@ public class SignDialog : BasicInteraction
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        keyE.SetActive(true);
-        StartCoroutine(UnPressKey());
+        if (collision.CompareTag("PJ"))
+        {
+            keyE.SetActive(true);
+            StartCoroutine(UnPressKey());
+        }
+       
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StopAllCoroutines();
-        keyE.SetActive(false);
+        if (collision.CompareTag("PJ"))
+        {
+            StopAllCoroutines();
+            keyE.SetActive(false);
+        }
     }
 }

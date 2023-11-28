@@ -78,6 +78,8 @@ public class PlayerControl : MonoBehaviour
                 savePlace = new Vector2(moveX, moveY);
             }
         }
+        Debug.Log("animation: " + playerAnimator.GetBool("Attack"));
+        Debug.Log("variable: " + canAttack);
         if (canAttack && Time.timeScale != 0)
         {
             
@@ -85,7 +87,7 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown("n") || Input.GetKeyDown("m"))
             {
                 playerAttack.ChangeWeapon();
-            }else if (Input.GetKeyDown("space"))
+            }else if (Input.GetKeyDown("space")&& !playerAnimator.GetBool("Attack"))
             {
                 canAttack = false;
                 playerAnimator.SetBool("Attack", true);
@@ -103,8 +105,9 @@ public class PlayerControl : MonoBehaviour
     }
     public void CanAttack()
     {
-        canAttack = true;
         playerAnimator.SetBool("Attack", false);
+        canAttack = true;
+        
     }
     public void Bounce(Vector2 pointHit)
     {

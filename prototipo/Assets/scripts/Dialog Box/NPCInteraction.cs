@@ -5,11 +5,17 @@ using UnityEngine;
 public class NPCInteraction : BasicInteraction
 {
     public string[] dialog;
+    public string[] dialogEndMisision;
     public string npcName;
     public Sprite npcFace;
+    public string itemNeed;
+    public string itemGive;
+    public Sprite imageItemGive;
+    private bool getItem=false;
     int dialogCounter;
     ControllerHUD controllerHUD;
     NpcRandomPatrol npcRandomPatrol;
+    PlayerAttack playerAttack;
 
     // Start is called before the first frame update
     
@@ -17,9 +23,12 @@ public class NPCInteraction : BasicInteraction
     {
         npcRandomPatrol = GetComponent<NpcRandomPatrol>();
         controllerHUD = FindObjectOfType<ControllerHUD>();
+        playerAttack = FindObjectOfType<PlayerAttack>();
     }
     public override bool Interact(Vector2 playerFacing,Vector2 playerPos)
     {
+        getItem = GetItem();
+        
         bool success = FacingNpc(playerFacing,playerPos,transform.position);
         if (success)
         {
@@ -35,19 +44,38 @@ public class NPCInteraction : BasicInteraction
     }
     private void NextDialog()
     {
-        if (dialogCounter == dialog.Length)
+        if (!getItem)
         {
-            EndDialog();
+            if (dialogCounter == dialog.Length)
+            {
+                EndDialog();
+            }
+            else
+            {
+                controllerHUD.NpcShowText(dialog[dialogCounter], npcName, npcFace);
+                dialogCounter++;
+            }
         }
         else
         {
-            controllerHUD.NpcShowText(dialog[dialogCounter],npcName,npcFace);
-            dialogCounter++;
+            if (dialogCounter == dialogEndMisision.Length)
+            {
+                EndDialog();
+            }
+            else
+            {
+                controllerHUD.NpcShowText(dialogEndMisision[dialogCounter], npcName, npcFace);
+                dialogCounter++;
+            }
         }
     }
     private void EndDialog()
     {
         controllerHUD.NpcHideText();
         dialogCounter = 0;
+    }
+    private bool GetItem()
+    {
+        return playerAttack.isItem(itemNeed,itemGive,imageItemGive);
     }
 }

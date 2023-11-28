@@ -1220,17 +1220,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775065675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c83b99a676b6c04d9fb477cbfec6273, type: 3}
+  m_Script: {fileID: 11500000, guid: bd1d7ca12c0dcc044b37247b7de614b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPoint: {fileID: 352946204}
-  textHealth: {fileID: 0}
-  dialogBox: {fileID: 0}
-  dialogText: {fileID: 0}
-  npcDialogBox: {fileID: 0}
-  npcDialogText: {fileID: 0}
-  npcName: {fileID: 0}
-  npcFace: {fileID: 0}
+  Point: {fileID: 352946204}
 --- !u!1 &2090415312
 GameObject:
   m_ObjectHideFlags: 0

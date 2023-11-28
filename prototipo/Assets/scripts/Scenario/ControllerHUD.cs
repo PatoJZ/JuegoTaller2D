@@ -54,6 +54,10 @@ public class ControllerHUD : MonoBehaviour
     public Image hudWeapon;
     private Animator hudWeaponAnimator;
 
+    [Header("Item")]
+    public Image[] numOfItems;
+    public Sprite imageDefault;
+
     
     // Start is called before the first frame update
     private void Start()
@@ -63,6 +67,7 @@ public class ControllerHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //textPoint.text = "Puntos: "+ ControllerSave.instance.point;
         currentHeart = Mathf.Clamp(currentHeart, minhearts, maxhearts);
         hp = Mathf.Clamp(Mathf.RoundToInt(ControllerSave.instance.life), 1, currentHeart * 4);
         UpdateCurrentHearts();
@@ -80,7 +85,7 @@ public class ControllerHUD : MonoBehaviour
         }
         //Cambiar texto
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !Pause.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !Pause.activeSelf&& !dialogBox.activeSelf)
         {
             Time.timeScale = 0;
             Pause.SetActive(true);
@@ -100,6 +105,7 @@ public class ControllerHUD : MonoBehaviour
     }
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(2);
     }
     public void Quit()
@@ -268,5 +274,17 @@ public class ControllerHUD : MonoBehaviour
                 break;
         }
     }
-    
+    public void UpdateItem(List<Sprite> imageItem)
+    {
+        for (int i = 0; i < numOfItems.Length; i++)
+        {
+                
+            if (imageItem.Count > 0 && i < imageItem.Count)
+                numOfItems[i].sprite = imageItem[i];
+            else
+                numOfItems[i].sprite = imageDefault;
+                
+        }
+        
+    }
 }

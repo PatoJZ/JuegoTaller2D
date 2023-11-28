@@ -37,7 +37,7 @@ public class EntitySpawner : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Vector3 posicionSpawn = transform.position;
         Instantiate(entidadPrefab, posicionSpawn, Quaternion.identity);
-        roundManager.EnemigoGenerado(); // Informa al RoundManager.
+        //roundManager.EnemigoGenerado(); // Informa al RoundManager.
     }
     public void calculoRadioGeneracion()
     {
@@ -59,6 +59,7 @@ public class EntitySpawner : MonoBehaviour
         if (jugadorDentroDelRadio && Time.time - tiempoUltimaGeneracion >= tiempoEspera)
         {
             StartCoroutine(GenerarEntidad());
+            roundManager.EnemigoGenerado();
             tiempoUltimaGeneracion = Time.time;
         }
     }

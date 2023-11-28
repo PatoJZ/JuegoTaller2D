@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 543476352414038611}
   - component: {fileID: 2764595433013587030}
   - component: {fileID: 5560840754119351520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coliflor
   m_TagString: Enemy
   m_Icon: {fileID: 0}

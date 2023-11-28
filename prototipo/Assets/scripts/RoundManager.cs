@@ -36,7 +36,7 @@ public class RoundManager : MonoBehaviour
             GenerarEnemigos();
         }
 
-        if (enemigosGenerados >= enemigosPorRonda-1)
+        if (enemigosGenerados >= enemigosPorRonda)
         {
             Generacion = false;
         }
@@ -56,7 +56,7 @@ public class RoundManager : MonoBehaviour
 
     public void GenerarEnemigos()
     {
-        if (enemigosGenerados <= enemigosPorRonda)
+        if (enemigosGenerados < enemigosPorRonda)
         {
             foreach (var spawner in spawners)
             {

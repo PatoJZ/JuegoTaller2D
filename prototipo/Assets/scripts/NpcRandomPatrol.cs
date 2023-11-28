@@ -58,8 +58,9 @@ public class NpcRandomPatrol : MonoBehaviour
         {
             animator.SetFloat("Horizontal", direction.x);
             animator.SetFloat("Vertical", direction.y);
+            animator.SetBool("Move", true);
         }
-        else animator.Play("Idle");
+        else animator.SetBool("Move", false) ;
 
         rigidBody.velocity = direction.normalized * speed;
     }

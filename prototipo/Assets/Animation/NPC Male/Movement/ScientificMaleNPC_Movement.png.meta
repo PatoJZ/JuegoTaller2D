@@ -1,0 +1,831 @@
+fileFormatVersion: 2
+guid: c25299144bf954240960c1a4cca6da1a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 364
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f5e8e4bc1955f44a150f88dc8c61bd
+      internalID: 336117143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 364
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0abdbb0fd8c79ff43bffda8b105c575b
+      internalID: 1350431411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 364
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59c2c5f639cf8f04e8e1acfe54c7d92c
+      internalID: -728251071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_3
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 364
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8890822823ece444195df0d291389780
+      internalID: -793594306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 312
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb6a5ed43e7684e47aa9e9a0e6269914
+      internalID: 1800760737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_5
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 312
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74e203c73749f9142aa07ada47297cfa
+      internalID: -995230826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_6
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 312
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af605b0e3e5aabf4d906a9b3f738600e
+      internalID: -1314517377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_7
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 312
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 357182cec71b01f4e9e043e7bfb83dba
+      internalID: -1913119642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77d3187032759ac438323957703fee5f
+      internalID: 654949640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_9
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 260
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae98b15e3aac1764a8e5aa696f107890
+      internalID: 1738513645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_10
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 260
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 082e3620664b50f40b8d4110cc320cf8
+      internalID: 443997514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_11
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 260
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd9e4b652a23e34381ba21dd5a56f06
+      internalID: -1731352766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 208
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf8066b1ce4870145b286abb6437335c
+      internalID: 151719639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_13
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 208
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eb3ba37518c9c345ad34aafe5a15029
+      internalID: 1669225353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_14
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 208
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f08775adc5d5a894eb76e58376c71f76
+      internalID: 1278015790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_15
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 208
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c92a3d0073b38049907dd87347fa20c
+      internalID: 1409023804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 156
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeb0f89909d591b438d642857296cc0d
+      internalID: -1751797998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_17
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 156
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b43380151e0f265438bce95db21e75be
+      internalID: -1391017990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_18
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 156
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58969f38d241d2c44a6aac288d3fa492
+      internalID: 1914691872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_19
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 156
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7c1400052531f44ad664f9d803facf
+      internalID: 1322585843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 104
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19b60e4d9f55ae4dbccdbff4ac5f0b2
+      internalID: 1227765151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_21
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 104
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f13664f5182ac614492f552547c673a3
+      internalID: 1260255890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_22
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 104
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c846860c8ee9ba64c88a365171c5db3c
+      internalID: -30912289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_23
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 104
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f68ee10d7882f6843949216f014611a7
+      internalID: 1199980171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35e3945568383143aeceb94c25ae0de
+      internalID: -1910937073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_25
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 52
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62e6ba488a488754ebc8827a82d52b43
+      internalID: 143264600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_26
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 52
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ebaae735869b5243a0cbf9e64567d37
+      internalID: -1360978726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_27
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 52
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48348844db89300468123c61e6d55b70
+      internalID: -1001163207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b62f9ab5a30ed1409696893793b23d9
+      internalID: 1720107246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_29
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0e6bc5f2090394bac2acdbab0b5807
+      internalID: -923253871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_30
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4295ed63add1d14ca50ff007c579bd3
+      internalID: -1337299830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientificMaleNPC_Movement_31
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 0
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e48c89018144e544a92fe990507400c1
+      internalID: 443065113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ScientificMaleNPC_Movement_0: 336117143
+      ScientificMaleNPC_Movement_1: 1350431411
+      ScientificMaleNPC_Movement_10: 443997514
+      ScientificMaleNPC_Movement_11: -1731352766
+      ScientificMaleNPC_Movement_12: 151719639
+      ScientificMaleNPC_Movement_13: 1669225353
+      ScientificMaleNPC_Movement_14: 1278015790
+      ScientificMaleNPC_Movement_15: 1409023804
+      ScientificMaleNPC_Movement_16: -1751797998
+      ScientificMaleNPC_Movement_17: -1391017990
+      ScientificMaleNPC_Movement_18: 1914691872
+      ScientificMaleNPC_Movement_19: 1322585843
+      ScientificMaleNPC_Movement_2: -728251071
+      ScientificMaleNPC_Movement_20: 1227765151
+      ScientificMaleNPC_Movement_21: 1260255890
+      ScientificMaleNPC_Movement_22: -30912289
+      ScientificMaleNPC_Movement_23: 1199980171
+      ScientificMaleNPC_Movement_24: -1910937073
+      ScientificMaleNPC_Movement_25: 143264600
+      ScientificMaleNPC_Movement_26: -1360978726
+      ScientificMaleNPC_Movement_27: -1001163207
+      ScientificMaleNPC_Movement_28: 1720107246
+      ScientificMaleNPC_Movement_29: -923253871
+      ScientificMaleNPC_Movement_3: -793594306
+      ScientificMaleNPC_Movement_30: -1337299830
+      ScientificMaleNPC_Movement_31: 443065113
+      ScientificMaleNPC_Movement_4: 1800760737
+      ScientificMaleNPC_Movement_5: -995230826
+      ScientificMaleNPC_Movement_6: -1314517377
+      ScientificMaleNPC_Movement_7: -1913119642
+      ScientificMaleNPC_Movement_8: 654949640
+      ScientificMaleNPC_Movement_9: 1738513645
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

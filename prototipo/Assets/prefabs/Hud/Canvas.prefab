@@ -908,8 +908,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6045244739609727408}
-  - {fileID: 8495024258480116186}
   - {fileID: 4166660570161381468}
+  - {fileID: 8495024258480116186}
   - {fileID: 8092363091160012199}
   - {fileID: 3841032651202643653}
   - {fileID: 1440525819186059319}
@@ -1153,6 +1153,10 @@ PrefabInstance:
     - target: {fileID: 3045266020058207502, guid: 03f6be75c6ef49740838502d8cdf22a0, type: 3}
       propertyPath: m_Name
       value: Dialog Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 3045266020058207502, guid: 03f6be75c6ef49740838502d8cdf22a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5489837273274621121, guid: 03f6be75c6ef49740838502d8cdf22a0, type: 3}
       propertyPath: m_Pivot.x
