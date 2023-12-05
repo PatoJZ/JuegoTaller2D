@@ -9,21 +9,45 @@ public class NpcRandomPatrol : MonoBehaviour
     public float maxPatrolTime;
     public float minWaitTime;
     public float maxWaitTime;
-
+    public bool canmove;
     Animator animator;
     Rigidbody2D rigidBody;
+    public GameObject keyE;
+    private Animator keyEAnimator;
 
-    Vector2 direction;
+    public Vector2 direction;
     // Start is called before the first frame update
     void Start()
     {
+        keyEAnimator = keyE.GetComponent<Animator>();
+        keyEAnimator.SetTrigger("E");
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
-
-        direction = RandomDirection();
-        animator.SetFloat("Horizontal", direction.x);
-        animator.SetFloat("Vertical", direction.y);
-        ContinueBehavior();
+        if (!canmove)
+        {
+            animator.SetFloat("Horizontal", direction.x);
+            animator.SetFloat("Vertical", direction.y);
+        }
+        else
+        {
+            direction = RandomDirection();
+            animator.SetFloat("Horizontal", direction.x);
+            animator.SetFloat("Vertical", direction.y);
+            ContinueBehavior();
+        }
+        
+    }
+    private IEnumerator PressKey()
+    {
+        keyEAnimator.SetBool("Hold", true);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(UnPressKey());
+    }
+    private IEnumerator UnPressKey()
+    {
+        keyEAnimator.SetBool("Hold", false);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(PressKey());
     }
     IEnumerator Patrol()
     {
@@ -84,8 +108,41 @@ public class NpcRandomPatrol : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PJ"))
         {
-            rigidBody.velocity = direction.normalized * speed;
+            if (canmove)
+                rigidBody.velocity = direction.normalized * speed;
+            else
+                rigidBody.velocity = Vector2.zero;
             collision.rigidbody.velocity =Vector2.zero;
+            
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PJ"))
+        {
+            if (!canmove)
+                rigidBody.velocity = Vector2.zero;
+
+        }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PJ"))
+        {
+            keyE.SetActive(true);
+            keyEAnimator.SetTrigger("E");
+            StartCoroutine(UnPressKey());
+        }
+
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PJ"))
+        {
+            StopAllCoroutines();
+            keyE.SetActive(false);
+
         }
     }
 }

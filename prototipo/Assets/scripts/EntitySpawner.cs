@@ -37,7 +37,7 @@ public class EntitySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         Vector3 posicionSpawn = transform.position;
-        Instantiate(entidadPrefab, posicionSpawn, Quaternion.identity);
+        Instantiate(entidadPrefab, new Vector3 (posicionSpawn.x, posicionSpawn.y+1, posicionSpawn.z), Quaternion.identity);
         //roundManager.EnemigoGenerado(); // Informa al RoundManager.
     }
     public void calculoRadioGeneracion()

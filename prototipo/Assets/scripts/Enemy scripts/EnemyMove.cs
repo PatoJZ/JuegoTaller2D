@@ -44,6 +44,10 @@ public class EnemyMove : MonoBehaviour
     }
     void Update()
     {
+        if (ControllerSave.instance.life<=0)
+        {
+            chase = false;
+        }
         enemyAnimator.SetBool("Chase", chase);
         if (PlayerM.GetComponent<PlayerAttack>().zone!=zone)
         {

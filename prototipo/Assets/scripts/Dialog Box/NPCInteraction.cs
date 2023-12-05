@@ -6,9 +6,11 @@ public class NPCInteraction : BasicInteraction
 {
     public string[] dialog;
     public string[] dialogEndMisision;
+    public string[] dialogAfter;
     public string npcName;
     public Sprite npcFace;
     public string itemNeed;
+    public string[] itemsNeed;
     public string itemGive;
     public Sprite imageItemGive;
     private bool getItem=false;
@@ -71,11 +73,33 @@ public class NPCInteraction : BasicInteraction
     }
     private void EndDialog()
     {
+        if (getItem)
+        {
+            for (int i=0; i<dialogEndMisision.Length;i++)
+            {
+                dialogEndMisision[i] = dialogAfter[i];
+            }
+        }
         controllerHUD.NpcHideText();
         dialogCounter = 0;
     }
     private bool GetItem()
     {
-        return playerAttack.isItem(itemNeed,itemGive,imageItemGive);
+        return playerAttack.isItem(itemsNeed,itemGive,imageItemGive);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PJ"))
+        {
+            collision.GetComponent<PlayerControl>().basicInteraction = this;
+        }
+
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PJ"))
+        {
+            collision.GetComponent<PlayerControl>().basicInteraction = null;
+        }
     }
 }

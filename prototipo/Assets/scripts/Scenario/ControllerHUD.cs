@@ -67,7 +67,7 @@ public class ControllerHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //textPoint.text = "Puntos: "+ ControllerSave.instance.point;
+        textPoint.text = "Puntos: "+ ControllerSave.instance.point;
         currentHeart = Mathf.Clamp(currentHeart, minhearts, maxhearts);
         hp = Mathf.Clamp(Mathf.RoundToInt(ControllerSave.instance.life), 1, currentHeart * 4);
         UpdateCurrentHearts();
@@ -245,7 +245,10 @@ public class ControllerHUD : MonoBehaviour
             case PlayerAttack.Directions.HOE:
                 if (Input.GetKeyDown("n"))
                 {
-                    hudWeaponAnimator.SetTrigger("HoeToTools");
+                    if(playerAttack.weaponBlock)
+                        hudWeaponAnimator.SetTrigger("HoeToShovelB");
+                    else
+                        hudWeaponAnimator.SetTrigger("HoeToTools");
                 }
                 else if (Input.GetKeyDown("m"))
                 {
@@ -259,7 +262,10 @@ public class ControllerHUD : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("m"))
                 {
-                    hudWeaponAnimator.SetTrigger("ShovelToTools");
+                    if (playerAttack.weaponBlock)
+                        hudWeaponAnimator.SetTrigger("ShovelToHoeB");
+                    else
+                        hudWeaponAnimator.SetTrigger("ShovelToTools");
                 }
                 break;
             case PlayerAttack.Directions.TOOLS:

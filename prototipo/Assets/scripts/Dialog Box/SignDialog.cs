@@ -15,6 +15,7 @@ public class SignDialog : BasicInteraction
     {
         controllerHUD = FindObjectOfType<ControllerHUD>();
         keyEAnimator = keyE.GetComponent<Animator>();
+        
     }
 
     private IEnumerator PressKey()
@@ -68,6 +69,7 @@ public class SignDialog : BasicInteraction
         {
             keyE.SetActive(true);
             StartCoroutine(UnPressKey());
+            collision.GetComponent<PlayerControl>().basicInteraction = this;
         }
        
     }
@@ -77,6 +79,7 @@ public class SignDialog : BasicInteraction
         {
             StopAllCoroutines();
             keyE.SetActive(false);
+            collision.GetComponent<PlayerControl>().basicInteraction = null;
         }
     }
 }

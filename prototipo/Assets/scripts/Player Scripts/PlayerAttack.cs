@@ -37,9 +37,11 @@ public class PlayerAttack : MonoBehaviour
     public Directions weapon;
 
     public int zone = 0;
+    public string weaponName = "tools";
+    public bool weaponBlock = true;
     private List<string> nameItem = new List<string>();
     private List<Sprite>  imageItem = new List<Sprite>();
-    private float maxHealth = 12;
+    
     private PlayerControl playerControl;
     private Animator playerAnimator;
     private ControllerHUD controllerHUD;
@@ -59,16 +61,16 @@ public class PlayerAttack : MonoBehaviour
     {
         animationIdle();
         playerControl.health -= damage;
-        StopCoroutine(StartHealthRecovery());
-        //StopAllCoroutines();
+        playerControl.ResetTime();
         if (playerControl.health <= 0)
         {
-            Dead();
+            ControllerSave.instance.KnowLife(playerControl.health);
+            playerControl.Bounce(position);
+            AnimationDead();
         }
         else
         {
             //se le quitara control del player y dara invulnerabilidad
-            StartCoroutine(StartHealthRecovery());
             StartCoroutine(OutOfControl());
             StartCoroutine(TimeOfInvulnerability());
             playerControl.Bounce(position);
@@ -92,28 +94,18 @@ public class PlayerAttack : MonoBehaviour
         }
     }
     //se cargara la escena
-    private void Dead()
+    private IEnumerator ResetLevel()
     {
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(2);
     }
-    private IEnumerator StartHealthRecovery()
+    private void Dead()
     {
-        yield return new WaitForSeconds(timeHealhRecuperate);
-        StartCoroutine(HealthRecovery());
+        StartCoroutine(ResetLevel());
     }
-    private IEnumerator HealthRecovery()
+    public void AnimationDead()
     {
-        if (maxHealth>playerControl.health)
-        {
-            playerControl.health += 1;
-            ControllerSave.instance.life = playerControl.health;
-        }
-        else
-        {
-            StopAllCoroutines();
-        }
-        yield return new WaitForSeconds(1);
-        StartCoroutine(HealthRecovery());
+        playerAnimator.SetTrigger("death");
     }
     //se quitara el control del player
     private IEnumerator OutOfControl()
@@ -177,7 +169,10 @@ public class PlayerAttack : MonoBehaviour
             case Directions.HOE:
                 if (Input.GetKeyDown("n"))
                 {
-                    weapon = Directions.TOOLS;
+                    if (weaponBlock)
+                        weapon = Directions.SHOVEL;
+                    else
+                        weapon = Directions.TOOLS;
                     animationIdle();
                 }
                 else if (Input.GetKeyDown("m"))
@@ -194,7 +189,10 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("m"))
                 {
-                    weapon = Directions.TOOLS;
+                    if (weaponBlock)
+                        weapon = Directions.HOE;
+                    else
+                        weapon = Directions.TOOLS;
                     animationIdle();
                 }
                 break;
@@ -236,23 +234,57 @@ public class PlayerAttack : MonoBehaviour
         imageItem.Add(b);
         controllerHUD.UpdateItem(imageItem);
     }
-    public bool isItem(string name,string keyName,Sprite items)
+    public bool isItem(string[] name,string keyName,Sprite items)
     {
+        List<int> datos = new List<int>();
         int i=0;
+        int max=0;
         foreach(string a in nameItem)
         {
-            if (a==name || keyName==a)
+            foreach (string b in name)
             {
-                nameItem[i] = keyName;
-                imageItem[i] = items;
-                controllerHUD.UpdateItem(imageItem);
+                if (a==b)
+                {
+                    max++;
+                    datos.Add(i);
+                }
+            }
+            if (a == keyName)
+            {
                 return true;
             }
             i++;
         }
+        if (max == name.Length)
+        {
+            nameItem[datos[0]] = keyName;
+            imageItem[datos[0]] = items;
+            controllerHUD.UpdateItem(imageItem);
+            for (int j = datos.Count-1; j >0; j--)
+            {
+                nameItem.RemoveAt(datos[j]);
+                imageItem.RemoveAt(datos[j]);
+                controllerHUD.UpdateItem(imageItem);
+            }
+            if (keyName==weaponName)
+            {
+                weaponBlock = false;
+            }
+            return true;
+        }
         return false;
     }
-
+    public bool HaveItem(string a)
+    {
+        foreach (string b in nameItem)
+        {
+            if (a==b)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

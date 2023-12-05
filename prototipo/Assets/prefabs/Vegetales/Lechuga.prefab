@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 7
   m_Sprite: {fileID: -884862384, guid: dbf2a154928555e419ee3a9b3ccd9b16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -212,6 +212,7 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 45
   direction: {x: 0, y: 0, z: 0}
+  zone: 0
 --- !u!114 &5423659339637099618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,3 +231,4 @@ MonoBehaviour:
   timeOutOfControl: 0.3
   timeOfCharge: 0
   bullet: {fileID: 0}
+  light: {fileID: 0}

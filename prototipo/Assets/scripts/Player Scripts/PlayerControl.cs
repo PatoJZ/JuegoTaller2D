@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
 {
     [Header("Movimientos")]
     [SerializeField] public float health = 3;
-    
+    private float maxHealt = 12;
     [SerializeField] public float speed = 3f;
     [SerializeField] private Vector2 speedBounce;
     public bool canMove = false;
@@ -21,7 +21,8 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D playerRb;
     private Animator playerAnimator;
     private Material material;
-    BasicInteraction basicInteraction;
+    private float timer;
+    public BasicInteraction basicInteraction;
     void Start()
     {
         health = Mathf.Clamp(health, 2, 12);
@@ -103,6 +104,23 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
+    public void Regeneratelife()
+    {
+        if (maxHealt!=health)
+        {
+            timer += Time.deltaTime;
+            if (timer>=playerAttack.timeHealhRecuperate)
+            {
+                health += 1;
+                ControllerSave.instance.life = health;
+                timer = playerAttack.timeHealhRecuperate-1;
+            }
+        } 
+    }
+    public void ResetTime()
+    {
+        timer = 0;
+    } 
     public void CanAttack()
     {
         playerAnimator.SetBool("Attack", false);
@@ -137,6 +155,7 @@ public class PlayerControl : MonoBehaviour
             Animation(savePlace.x, savePlace.y);
         }
         angulo_base = new Vector2(transform.position.x-playerAttack.radioLimit, transform.position.y);
+        Regeneratelife();
         // vector base = new vector2(miposicion.x - limitecirculo,x, lo mismo en y);
         // vector enemigo = new Vector2(miposicion.x - posicionenemiga.x, lo mismo en y);
         //Debug.Log("atacar es : "+canAttack);
@@ -153,9 +172,10 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.CompareTag("Interaction"))
         {
-            basicInteraction = collision.GetComponent<BasicInteraction>();
+            //basicInteraction = collision.GetComponent<BasicInteraction>();
         }
         
     }
@@ -163,7 +183,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.CompareTag("Interaction"))
         {
-            basicInteraction = null;
+            //basicInteraction = null;
         }
     }
 

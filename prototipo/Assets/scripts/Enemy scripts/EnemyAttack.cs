@@ -83,6 +83,11 @@ public class EnemyAttack : MonoBehaviour
         enemyAnimator.SetBool("Attacks",false);
         enemyAnimator.SetTrigger("Idle");
     }
+    public void Emerge()
+    {
+        enemyAnimator.SetTrigger("Idle");
+        enemyMove.chase = true;
+    }
     private void AnimationDamagePotato()
     {
         enemyAnimator.SetTrigger("Damage");
