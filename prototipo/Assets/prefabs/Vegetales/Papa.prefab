@@ -201,6 +201,7 @@ MonoBehaviour:
   speedBounce: {x: 5, y: 5}
   speed: 3
   rotationSpeed: 45
+  timer: 0
   direction: {x: 0, y: 0, z: 0}
   zone: 0
 --- !u!114 &754354955641264566
@@ -220,5 +221,7 @@ MonoBehaviour:
   damageAttack: 1
   timeOutOfControl: 0.3
   timeOfCharge: 0
+  roundManager: {fileID: 0}
   bullet: {fileID: 0}
   light: {fileID: 0}
+  damageRecive: {fileID: 8300000, guid: f89f44e6afa2cc44b936dfda03c462cf, type: 3}

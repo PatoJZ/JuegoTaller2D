@@ -13,12 +13,16 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] public float health = 3;
     [SerializeField] public float damageAttack;
     [Header("Tiempos")]
-    [SerializeField] private float timeOutOfControl;
-    [SerializeField] private float timeOfCharge;
+    [SerializeField] public float timeOutOfControl;
+    [SerializeField] public float timeOfCharge;
+    public RoundManager roundManager;
+    private bool isDead=false;
     private Animator enemyAnimator;
     private Rigidbody2D rb;
     public GameObject bullet;
     public Light2D light;
+    [Header("Sonidos")]
+    public AudioClip damageRecive;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,31 +38,32 @@ public class EnemyAttack : MonoBehaviour
     // quitar vida del enemigo donde se pide el daño y la posicion de enpuje
     public void TakeEnemyDamage(float damage, Vector2 position)
     {
-        health -= damage;
-        
-        StartCoroutine(OutOfControl());
-        enemyMove.Bounce(position);
-        if (health <= 0)
-        {
-            ControllerSave.instance.point += 10;
-            animationDead();
-        }
+            health -= damage;
+
+            StartCoroutine(OutOfControl());
+            enemyMove.Bounce(position);
+            if (health <= 0)
+            {
+                isDead = true;
+                ControllerSave.instance.point += 10;
+                animationDead();
+            }
     }
     public void animationDead()
     {
         enemyAnimator.SetTrigger("Dead");
-        FindObjectOfType<RoundManager>().EnemigoEliminado();
+        roundManager.EnemigoEliminado();
+        FindObjectOfType<ControllerHUD>().enemyPoints++;
     }
     //Eliminacion del gameObject
     private void Dead()
     {
         Destroy(gameObject);
-        FindObjectOfType<RoundManager>().EnemigoEliminado();
     }
     public void DeadForZone()
     {
+        roundManager.EnemigoEliminadoPorZona();
         Destroy(gameObject);
-        FindObjectOfType<RoundManager>().EnemigoEliminadoPorZona();
     }
     //se cambia el booleano que deja avanzar al player 
     private IEnumerator OutOfControl()
@@ -95,21 +100,13 @@ public class EnemyAttack : MonoBehaviour
     ///////******************Rabano**********************///////
     public void StartRolling()
     {
+        enemyMove.timer = 0;
         enemyMove.direction = new Vector3(enemyMove.PlayerM.transform.position.x - transform.position.x, enemyMove.PlayerM.transform.position.y - transform.position.y, transform.position.z);
-
-        // Normaliza el vector de dirección para que el enemigo se mueva a una velocidad constante.
         enemyMove.direction.Normalize();
         enemyMove.chase = true;
         enemyMove.tackle = true;
-        StartCoroutine(MoveRolling());
-    }
-    private IEnumerator MoveRolling()
-    {
-        enemyAnimator.SetBool("Rolling",true);
-        yield return new WaitForSeconds(timeOfCharge);
-        enemyAnimator.SetBool("Rolling", false);
-        enemyMove.chase = false;
-        enemyAnimator.SetBool("AttackAnimation",false);
+        enemyAnimator.SetBool("Rolling", true);
+        //StartCoroutine(MoveRolling());
     }
     public void EndRolling()
     {
@@ -120,7 +117,6 @@ public class EnemyAttack : MonoBehaviour
     }
     public void Shock()
     {
-        StopAllCoroutines();
         enemyAnimator.SetBool("Rolling", false);
         enemyMove.tackle = false;
         enemyAnimator.SetBool("Stun",true);
@@ -143,6 +139,7 @@ public class EnemyAttack : MonoBehaviour
     {
         enemyAnimator.SetBool("Stun", false);
         enemyMove.chase = true;
+        enemyMove.tackle = false;
         enemyAnimator.SetBool("AttackAnimation", false);
         enemyAnimator.SetTrigger("Idle");
     }
@@ -215,7 +212,8 @@ public class EnemyAttack : MonoBehaviour
     public void Explotion()
     {
         Instantiate(bullet,transform.position,transform.rotation);
-        FindObjectOfType<RoundManager>().EnemigoEliminado();
+        roundManager.EnemigoEliminado();
+        FindObjectOfType<ControllerHUD>().enemyPoints++;
         Destroy(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -228,6 +226,7 @@ public class EnemyAttack : MonoBehaviour
                 {
                     
                     collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(damageAttack, collision.GetContact(0).normal);
+                    ControllerSound.instance.ExecuteSound(damageRecive);
                 }
 
                 break;
@@ -243,8 +242,10 @@ public class EnemyAttack : MonoBehaviour
         switch (typeOfEnemy)
         {
             case Directions.EMBESTIDA:
-                if (enemyAnimator.GetBool("AttackAnimation"))
+                
+                if (enemyAnimator.GetBool("AttackAnimation")&& !collision.gameObject.CompareTag("Enemy") && !isDead)
                 {
+                    enemyMove.timer = 0;
                     enemyMove.chase = false;
                     enemyAnimator.SetTrigger("Shock");
                 }
@@ -258,34 +259,38 @@ public class EnemyAttack : MonoBehaviour
         switch (typeOfEnemy)
         {
             case Directions.CUERPO:
-                if (collision.gameObject.CompareTag("Weapon"))
+                if (collision.gameObject.CompareTag("Weapon") && !isDead)
                 {
                     AnimationDamagePotato();
+                    ControllerSound.instance.ExecuteSound(FindObjectOfType<PlayerAttack>().weaponSound);
                     TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     
                 }
                 break;
             case Directions.DISPARADOR:
-                if (collision.gameObject.CompareTag("Weapon"))
+                if (collision.gameObject.CompareTag("Weapon") && !isDead)
                 {
                     AnimationDamageCarrot();
+                    ControllerSound.instance.ExecuteSound(FindObjectOfType<PlayerAttack>().weaponSound);
                     TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     
                 }
                 break;
                 
             case Directions.EMBESTIDA:
-                if (collision.gameObject.CompareTag("Weapon")&& (!enemyAnimator.GetBool("AttackAnimation")|| enemyAnimator.GetBool("Stun")))
+                if (collision.gameObject.CompareTag("Weapon")&& (enemyAnimator.GetBool("Stun"))&&!isDead)
                 {
                     AnimationDamageRadish();
+                    ControllerSound.instance.ExecuteSound(FindObjectOfType<PlayerAttack>().weaponSound);
                     TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     
                 }
                 break;
             case Directions.EXPLOCION:
-                if (collision.gameObject.CompareTag("Weapon"))
+                if (collision.gameObject.CompareTag("Weapon") && !isDead)
                 {
                     AnimationDamageCauliflower();
+                    ControllerSound.instance.ExecuteSound(FindObjectOfType<PlayerAttack>().weaponSound);
                     TakeEnemyDamage(FindObjectOfType<PlayerAttack>().hitDamage, -FindObjectOfType<PlayerControl>().savePlace);
                     
                 }

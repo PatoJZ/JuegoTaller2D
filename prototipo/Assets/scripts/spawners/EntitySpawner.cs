@@ -12,9 +12,14 @@ public class EntitySpawner : MonoBehaviour
     public int zone;
     private bool jugadorDentroDelRadio = false;
     private float tiempoUltimaGeneracion = 0f;
+    private Animator animator;
 
     // Update is called once per frame
-   
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void OnDrawGizmos()
     {
         Vector3 jugadorPosition = GameObject.FindWithTag("PJ").transform.position;
@@ -64,12 +69,20 @@ public class EntitySpawner : MonoBehaviour
             tiempoUltimaGeneracion = Time.time;
         }
     }
+    public void animationDead()
+    {
+        animator.SetTrigger("Destroy");
+    }
+    public void Destruir()
+    {
+        Destroy(gameObject);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.transform.GetComponent<EnemyMove>().PlayerM = Player;
-
+            Debug.Log("");
         }
         
     }
@@ -77,8 +90,9 @@ public class EntitySpawner : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.transform.GetComponent<EnemyMove>().PlayerM = Player;
-            collision.transform.GetComponent<EnemyMove>().zone = zone;
+            collision.gameObject.GetComponent<EnemyMove>().PlayerM = Player;
+            collision.gameObject.GetComponent<EnemyMove>().zone = zone;
+            collision.gameObject.GetComponent<EnemyAttack>().roundManager = roundManager;
         }
     }
 

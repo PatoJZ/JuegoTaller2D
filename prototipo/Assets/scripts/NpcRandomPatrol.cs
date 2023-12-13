@@ -141,6 +141,12 @@ public class NpcRandomPatrol : MonoBehaviour
         if (collision.gameObject.CompareTag("PJ"))
         {
             StopAllCoroutines();
+            if (canmove)
+            {
+                Animation();
+                StartCoroutine(Patrol());
+            }
+            
             keyE.SetActive(false);
 
         }

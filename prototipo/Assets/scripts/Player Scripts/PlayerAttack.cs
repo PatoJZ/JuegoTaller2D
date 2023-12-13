@@ -39,9 +39,13 @@ public class PlayerAttack : MonoBehaviour
     public int zone = 0;
     public string weaponName = "tools";
     public bool weaponBlock = true;
+    
     private List<string> nameItem = new List<string>();
     private List<Sprite>  imageItem = new List<Sprite>();
-    
+    [Header("Sonidos")]
+    public AudioClip dead;
+    public AudioClip weaponSound;
+    public AudioClip[] weaponSounds;
     private PlayerControl playerControl;
     private Animator playerAnimator;
     private ControllerHUD controllerHUD;
@@ -218,12 +222,15 @@ public class PlayerAttack : MonoBehaviour
         switch (weapon)
         {
             case Directions.HOE:
+                weaponSound = weaponSounds[0];
                 hitDamage = hitDamageHacha;
                 break;
             case Directions.SHOVEL:
+                weaponSound = weaponSounds[1];
                 hitDamage = hitDamageShovel;
                 break;
             case Directions.TOOLS:
+                weaponSound = weaponSounds[2];
                 hitDamage = hitDamageTools;
                 break;
         }

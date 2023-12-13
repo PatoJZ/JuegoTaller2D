@@ -7,51 +7,62 @@ public class RoundManager : MonoBehaviour
 {
     public EntitySpawner[] spawners; // Array de objetos spawner en el mapa.
     public Transform jugador;
-    public TMP_Text rondasText; // TextMeshPro para mostrar el número de rondas.
-    public TMP_Text enemigosText; // TextMeshPro para mostrar la cantidad de enemigos.
 
     public int rondaActual = 0; // Número de ronda actual.
+    public int rondaFinal = 2;
     public int enemigosPorRonda = 2; // Cantidad inicial de enemigos por ronda.
     public int totalEnemigosRondaActual = 0; // Total de enemigos en la ronda actual.
-    public static int enemigosGenerados = 1; // Cantidad de enemigos generados en la ronda actual.
-    private int enemigosEliminados = 0; // Cantidad de enemigos eliminados en la ronda actual.
+    public int enemigosGenerados = 1; // Cantidad de enemigos generados en la ronda actual.
+    public int enemigosEliminados = 0; // Cantidad de enemigos eliminados en la ronda actual.
 
     public float duracionParpadeo = 3f; // Duración total del parpadeo.
     public float intervaloParpadeo = 0.5f; // Intervalo entre cambios de color del parpadeo.
-    private Color colorOriginal;
 
     public bool Generacion;
+    public bool eliminar = false;
+    public ControllerHUD controllerHUD;
+    [Header("puertas")]
+    public GameObject[] doorBlock;
+    public int zone;
 
     public void Start()
     {
+        controllerHUD = FindObjectOfType<ControllerHUD>();
         Generacion = true;
-        colorOriginal = rondasText.color;
-        ActualizarTextos();
         ComenzarNuevaRonda();
     }
     public void Update()
     {
+        if (zone== FindObjectOfType<PlayerAttack>().zone)
+        {
+            foreach (GameObject a in doorBlock)
+            {
+
+                a.SetActive(true);
+            }
+            //Debug.Log(enemigosGenerados);
+        }
         if (Generacion)
         {
             GenerarEnemigos();
         }
-        Debug.Log(enemigosGenerados);
         if (enemigosGenerados >= enemigosPorRonda)
         {
             Generacion = false;
         }
+        if (rondaActual>rondaFinal)
+        {
+            controllerHUD.DeleteRoundManagers();
+        }
     }
     public void ComenzarNuevaRonda()
     {
-        StartCoroutine(ParpadearTextoRondaCompleta());
         Generacion = true;
         rondaActual++;
         enemigosGenerados = 0;
         totalEnemigosRondaActual = enemigosPorRonda;
         enemigosEliminados = 0;
-        ActualizarTextos();
         GenerarEnemigos();
-        Debug.Log("enemigo por ronda = " + (enemigosPorRonda - 1).ToString());
     }
 
     public void GenerarEnemigos()
@@ -74,11 +85,10 @@ public class RoundManager : MonoBehaviour
     public void EnemigoEliminado()
     {
         enemigosEliminados++;
-        ActualizarTextos();
 
         if (enemigosEliminados >= totalEnemigosRondaActual)
         {
-            enemigosPorRonda += 4;
+            enemigosPorRonda += 2;
             ComenzarNuevaRonda();
         }
     }
@@ -87,27 +97,16 @@ public class RoundManager : MonoBehaviour
         enemigosGenerados--;
         Generacion = true;
     }
-
-    private void ActualizarTextos()
+    public void RemoverSpawner()
     {
-        rondasText.text = "Ronda: " + rondaActual.ToString();
-        enemigosText.text = "Enemigos: " + enemigosEliminados + " / " + totalEnemigosRondaActual;
-    }
-    private IEnumerator ParpadearTextoRondaCompleta()
-    {
-        float tiempoTranscurrido = 0f;
-
-        while (tiempoTranscurrido < duracionParpadeo)
+        int i=0;
+        foreach (EntitySpawner a in spawners)
         {
-            rondasText.color = (rondasText.color == colorOriginal) ? Color.red : colorOriginal;
-            tiempoTranscurrido += intervaloParpadeo;
-            yield return new WaitForSeconds(intervaloParpadeo);
+            spawners[i] = null;
+            a.animationDead();
+            i++;
         }
-
-        // Restaura el color original y avanza a la siguiente ronda.
-        rondasText.color = colorOriginal;
-
-
+        Destroy(gameObject);
     }
 }
 

@@ -17,7 +17,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] private Vector2 speedBounce;
     [SerializeField] private float speed;
     public float rotationSpeed = 45.0f; // Grados por segundos
-    private float timer=0;
+    public float timer=0;
     private bool limit=false;
     private float angle = 0.0f;
     public Vector3 direction;
@@ -48,11 +48,11 @@ public class EnemyMove : MonoBehaviour
         {
             chase = false;
         }
-        enemyAnimator.SetBool("Chase", chase);
         if (PlayerM.GetComponent<PlayerAttack>().zone!=zone)
         {
             enemyAttack.DeadForZone();
         }
+        enemyAnimator.SetBool("Chase",chase);
         if (chase && GetComponent<EnemyAttack>().health>0)
         {
             switch (typeOfEnemy)
@@ -115,7 +115,10 @@ public class EnemyMove : MonoBehaviour
 
                     if (!tackle)
                     {
-                        FollowPlayer(true);
+                            
+                            FollowPlayer(true);
+                        
+                        
                         if (PlayerM.transform.position.x >= transform.position.x)
                         {
                             gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -128,8 +131,15 @@ public class EnemyMove : MonoBehaviour
                     }
                     else
                     {
+                        timer += Time.deltaTime;
                         // Mueve al enemigo en la dirección del jugador.
                         transform.position += direction * speed*2 * Time.deltaTime;
+                        if (timer>=enemyAttack.timeOfCharge)
+                        {
+                            enemyAnimator.SetBool("Rolling", false);
+                            chase = false;
+                            enemyAnimator.SetBool("AttackAnimation", false);
+                        }
                     }
                     break;
                 case Directions.EXPLOCION:
@@ -149,30 +159,31 @@ public class EnemyMove : MonoBehaviour
             
         }
     }
+    
     private void OnCollisionStay2D(Collision2D collision)
     {
         switch (typeOfEnemy)
         {
             case Directions.CUERPO:
-                if (!collision.gameObject.CompareTag("PJ"))
+                if (!collision.gameObject.CompareTag("PJ")&&!collision.gameObject.CompareTag("Enemy"))
                 {
                     EscapeObstacle(collision);
                 }
                 break;
             case Directions.DISPARADOR:
-                if (!collision.gameObject.CompareTag("PJ"))
+                if (!collision.gameObject.CompareTag("PJ")&& !collision.gameObject.CompareTag("Enemy"))
                 {
                     EscapeObstacle(collision);
                 }
                 break;
             case Directions.EMBESTIDA:
-                if (!collision.gameObject.CompareTag("PJ")&& !enemyAnimator.GetBool("AttackAnimation"))
+                if (!collision.gameObject.CompareTag("PJ")&& !enemyAnimator.GetBool("AttackAnimation")&& !collision.gameObject.CompareTag("Enemy"))
                 {
                     EscapeObstacle(collision);
                 }
                 break;
             case Directions.EXPLOCION:
-                if (!collision.gameObject.CompareTag("PJ") && !enemyAnimator.GetBool("AttackAnimation"))
+                if (!collision.gameObject.CompareTag("PJ") && !enemyAnimator.GetBool("AttackAnimation")&& !collision.gameObject.CompareTag("Enemy"))
                 {
                     EscapeObstacle(collision);
                 }
@@ -192,7 +203,6 @@ public class EnemyMove : MonoBehaviour
                     limit = true;
                     Vector2 relativeVector = transform.position - collision.transform.position;
                     angle = Mathf.Atan2(relativeVector.y, relativeVector.x) * Mathf.Rad2Deg;
-                    Debug.Log("enter " + angle);
                 }
                 break;
             case Directions.EMBESTIDA:
@@ -207,21 +217,16 @@ public class EnemyMove : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        switch (typeOfEnemy)
+        if (collision.CompareTag("Limit"))
         {
-            case Directions.CUERPO:
-
-                break;
-            case Directions.DISPARADOR:
-                if (collision.CompareTag("Limit"))
-                {
+            switch (typeOfEnemy)
+            {
+                case Directions.DISPARADOR:
                     limit = false;
-                }
-                break;
-            case Directions.EMBESTIDA:
-
-                break;
+                    break;
+            }
         }
+        
     }
     private void FollowPlayer(bool i)
     {

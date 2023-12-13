@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,17 @@ public class PlayerControl : MonoBehaviour
     [Header("Posicion Jugador")]
     public Vector2 savePlace;
     public Vector2 angulo_base;
+    [Header("Codigo")]
+    public AudioClip sonidoNuevo;
+    private List<KeyCode> codigoSecreto = new List<KeyCode> {
+        KeyCode.UpArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.DownArrow,
+        KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.RightArrow,
+        KeyCode.B, KeyCode.A
+    };
+    private List<KeyCode> entradasJugador = new List<KeyCode>();
+    /// <summary>
+    /// ///////////
+    /// </summary>
     private Vector2 moveInput;
     private PlayerAttack playerAttack;
     private Rigidbody2D playerRb;
@@ -79,8 +91,6 @@ public class PlayerControl : MonoBehaviour
                 savePlace = new Vector2(moveX, moveY);
             }
         }
-        Debug.Log("animation: " + playerAnimator.GetBool("Attack"));
-        Debug.Log("variable: " + canAttack);
         if (canAttack && Time.timeScale != 0)
         {
             
@@ -145,9 +155,70 @@ public class PlayerControl : MonoBehaviour
             material.color = Color.white;
         }
     }
+    bool VerificationSequence()
+    {
+        if (entradasJugador.Count > codigoSecreto.Count)
+        {
+            // Elimina la primera entrada si la lista es más larga que la secuencia secreta
+            entradasJugador.RemoveAt(0);
+        }
+
+        // Compara las listas
+        for (int i = 0; i < entradasJugador.Count; i++)
+        {
+            if (entradasJugador[i] != codigoSecreto[i])
+            {
+                return false;
+            }
+        }
+
+        // Si llega a este punto, la secuencia coincide
+        if (entradasJugador.Count == codigoSecreto.Count)
+        {
+            // Realiza la acción secreta aquí
+            ActivateSecretAction();
+
+            // Limpia la lista de entradas para futuros intentos
+            entradasJugador.Clear();
+        }
+
+        return true;
+    }
+    void ActivateSecretAction()
+    {
+        Debug.Log("activado");
+        playerAttack.weaponSounds[1] = sonidoNuevo;
+        playerAttack.weaponSound = playerAttack.weaponSounds[1];
+        // Agrega aquí la lógica que deseas ejecutar al activar el código secreto
+    }
+    KeyCode GetLastKeyPressed()
+    {
+        foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKeyDown(key))
+            {
+                return key;
+            }
+        }
+        return KeyCode.None;
+    }
     // Update is called once per frame
     void Update()
     {
+        if (Input.anyKeyDown)
+        {
+            if (Input.anyKeyDown)
+            {
+                entradasJugador.Add(GetLastKeyPressed());
+            }
+
+            // Verifica si la secuencia coincide hasta el momento
+            if (!VerificationSequence())
+            {
+                // Restablece la lista si la secuencia es incorrecta
+                entradasJugador.Clear();
+            }
+        }
         HitAnimation();
         Inputs();
         if (Time.timeScale!=0)
@@ -169,22 +240,6 @@ public class PlayerControl : MonoBehaviour
             playerRb.velocity = new Vector2(0,0);
             playerRb.MovePosition(playerRb.position+moveInput*speed*Time.fixedDeltaTime);
         } 
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-        if (collision.CompareTag("Interaction"))
-        {
-            //basicInteraction = collision.GetComponent<BasicInteraction>();
-        }
-        
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Interaction"))
-        {
-            //basicInteraction = null;
-        }
     }
 
 }

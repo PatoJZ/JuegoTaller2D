@@ -10770,8 +10770,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Moverse
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
-  m_sharedMaterial: {fileID: 4680450504458305779, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13328,11 +13328,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Para cruzar las puertas, se necesitara conseguir una cierta cantidad de
-    puntos, puntos que se consiguen tras derrotar a los enemigos.
+  m_text: 'Para cruzar las puertas, se necesitara llegar hasta ciertas oleada que
+    especificara en la misma puerta, y para terminar las oleadas se tendran que derrotar
+    a los enemigos.                                '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
-  m_sharedMaterial: {fileID: 4680450504458305779, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13363,7 +13364,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 16
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -13783,8 +13784,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '       Atacar'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
-  m_sharedMaterial: {fileID: 4680450504458305779, guid: 2042010d4b80a434788f2cfc22b29f62, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

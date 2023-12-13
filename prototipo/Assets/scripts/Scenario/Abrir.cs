@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Abrir : MonoBehaviour
 {
-    public float pointNecesary;
+    public float roundMax;
     public string key;
     public bool needKey;
+    public RoundManager roundManager;
     public GameObject locket;
     public GameObject keyE;
     private Animator keyEAnimator;
@@ -17,6 +18,16 @@ public class Abrir : MonoBehaviour
         if (needKey)
         {
             locket.SetActive(true);
+        }
+    }
+    private void Update()
+    {
+        if(!needKey)
+        {
+            if (roundManager.rondaActual > roundMax)
+            {
+                Destroy(gameObject);
+            }
         }
     }
     private IEnumerator PressKey()
@@ -36,9 +47,12 @@ public class Abrir : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PJ"))
         {
-            keyE.SetActive(true);
-            keyEAnimator.SetTrigger("E");
-            StartCoroutine(UnPressKey());
+            if (collision.gameObject.GetComponent<PlayerAttack>().HaveItem(key))
+            {
+                keyE.SetActive(true);
+                keyEAnimator.SetTrigger("E");
+                StartCoroutine(UnPressKey());
+            }
         }
         
     }
@@ -54,23 +68,10 @@ public class Abrir : MonoBehaviour
                 {
                     if (collision.gameObject.GetComponent<PlayerAttack>().HaveItem(key))
                     {
-                        Destroy(locket);
-                    }
-                    if (ControllerSave.instance.point >= pointNecesary && collision.gameObject.GetComponent<PlayerAttack>().HaveItem(key))
-                    {
-                        Destroy(gameObject);
-                    }
-                }
-                else
-                {
-                    if (ControllerSave.instance.point >= pointNecesary)
-                    {
                         Destroy(gameObject);
                     }
                 }
             }
-            
-
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

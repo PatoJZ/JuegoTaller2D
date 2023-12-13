@@ -12,7 +12,7 @@ public class ControllerHUD : MonoBehaviour
     public Image[] playerHearts;
     public Sprite[] heartStatus;
     public int currentHeart;
-    [SerializeField]private int hp;
+    [SerializeField] private int hp;
 
 
     static int minhearts = 1;
@@ -39,6 +39,8 @@ public class ControllerHUD : MonoBehaviour
 
     [Header("Pause")]
     public GameObject Pause;
+    public GameObject controles;
+    public GameObject opciones;
 
     [Header("Dialog Box")]
     public GameObject dialogBox;
@@ -55,22 +57,42 @@ public class ControllerHUD : MonoBehaviour
     private Animator hudWeaponAnimator;
 
     [Header("Item")]
+    
     public Image[] numOfItems;
     public Sprite imageDefault;
-
+    
+    [Header("roundManager")]
+    
+    public GameObject barraRondas;
+    public Slider sliderBarra;
+    public Animator anima;
+    public GameObject[] roundsManager;
+    public int[] zone ;
+    public int indice=0;
+    public float enemyPoints;
+    public Image actualNum;
+    public Image numAfter;
+    public Sprite[] numeros;
+    private int rondaActual;
+    private int totalrondas;
+    public float sumPoints;
+    private bool inicio;
     
     // Start is called before the first frame update
     private void Start()
     {
         hudWeaponAnimator = hudWeapon.GetComponent<Animator>();
+        DefineRonda();
+        ResetBarra();
     }
     // Update is called once per frame
     void Update()
     {
-        textPoint.text = "Puntos: "+ ControllerSave.instance.point;
+        //corazones
         currentHeart = Mathf.Clamp(currentHeart, minhearts, maxhearts);
-        hp = Mathf.Clamp(Mathf.RoundToInt(ControllerSave.instance.life), 1, currentHeart * 4);
+        hp = Mathf.Clamp(Mathf.RoundToInt(ControllerSave.instance.life), 0, currentHeart * 4);
         UpdateCurrentHearts();
+        //tiempos de powerup
         if (timeActivateVelocity)
         {
             ChangeCountVelocity();
@@ -83,23 +105,34 @@ public class ControllerHUD : MonoBehaviour
         {
             ChangeCountAttackVelocity();
         }
-        //Cambiar texto
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !Pause.activeSelf&& !dialogBox.activeSelf)
+        //pausa
+        if (Input.GetKeyDown(KeyCode.Escape) && !Pause.activeSelf && !dialogBox.activeSelf && !npcDialogBox.activeSelf)
         {
             Time.timeScale = 0;
             Pause.SetActive(true);
 
-        } else if (Input.GetKeyDown(KeyCode.Escape) && Pause.activeSelf)
+        } else if (Input.GetKeyDown(KeyCode.Escape) && !dialogBox.activeSelf && !npcDialogBox.activeSelf &&!controles.activeSelf && !opciones.activeSelf)
         {
             Time.timeScale = 1;
             Pause.SetActive(false);
         }
+        //visor de las rondas
+        if (roundsManager[indice]!=null||(enemyPoints!= sumPoints || rondaActual != totalrondas))
+        {
+            barraRondas.SetActive(true);
+            BarraRonas();
+            
+        }
+
+        else
+        {
+            barraRondas.SetActive(false);
+        }
 
     }
+    // botones menu
     public void Continue()
     {
-        Debug.Log("Click");
         Time.timeScale = 1;
         Pause.SetActive(false);
     }
@@ -111,7 +144,25 @@ public class ControllerHUD : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-    } 
+    }
+    public void Abrir()
+    {
+        controles.SetActive(true);
+    }
+    public void Cerrar()
+    {
+        controles.SetActive(false);
+    }
+    public void Abrir2()
+    {
+        opciones.SetActive(true);
+    }
+    public void Cerrar2()
+    {
+        opciones.SetActive(false);
+    }
+    //corazones
+
     private void UpdateCurrentHearts()
     {
         int aux = hp;
@@ -147,6 +198,7 @@ public class ControllerHUD : MonoBehaviour
             default: return heartStatus[0];
         }
     }
+    //power ups
     public void ActivateVelocity(float maxTime)
     {
         Velocity.SetActive(true);
@@ -210,6 +262,7 @@ public class ControllerHUD : MonoBehaviour
 
         }
     }
+    //dialog box cartel y npc
     public void ShowText(string text)
     {
         dialogBox.SetActive(true);
@@ -238,6 +291,7 @@ public class ControllerHUD : MonoBehaviour
         npcFace.sprite = null;
         Time.timeScale = 1;
     }
+    //Cambiar arma
     public void ChangeWeapon(PlayerAttack playerAttack)
     {
         switch (playerAttack.weapon)
@@ -293,4 +347,69 @@ public class ControllerHUD : MonoBehaviour
         }
         
     }
+    // sistemas de rondas
+    public void DeleteRoundManagers()
+    {
+        int i=0;
+
+        foreach(GameObject a in roundsManager)
+        {
+            if (i==indice&& a!=null)
+            {
+                roundsManager[i]=null;
+                a.GetComponent<RoundManager>().RemoverSpawner();
+            }
+            
+            i++;
+        }
+    }
+    public void DefineRonda()
+    {
+        if (roundsManager[indice] != null)
+        {
+            sliderBarra.maxValue = roundsManager[indice].GetComponent<RoundManager>().enemigosPorRonda;
+            enemyPoints = 0;
+            if (!inicio)
+            {
+                actualNum.sprite = numeros[0];
+                numAfter.sprite = numeros[1];
+                inicio = true;
+            }
+            else
+            {
+                actualNum.sprite = numeros[roundsManager[indice].GetComponent<RoundManager>().rondaActual - 1];
+                numAfter.sprite = numeros[roundsManager[indice].GetComponent<RoundManager>().rondaActual];
+            }
+        }
+        
+    }
+    public void ResetBarra()
+    {
+        rondaActual=0;
+        totalrondas= roundsManager[indice].GetComponent<RoundManager>().rondaFinal;
+    }
+    public void BarraRonas()
+    {
+        
+        if (sumPoints< enemyPoints&& !Pause.activeSelf)
+        {
+            sumPoints += Time.unscaledDeltaTime;
+            anima.SetBool("move",true);
+        }
+        else
+        {
+            if (!Pause.activeSelf)
+            {
+                anima.SetBool("move", false);
+                sumPoints = enemyPoints;
+            }
+        }
+        sliderBarra.value = sumPoints;
+        if (sliderBarra.value == sliderBarra.maxValue&& rondaActual!=totalrondas) 
+        {
+            DefineRonda();
+            rondaActual++;
+        }
+    }
+
 }
