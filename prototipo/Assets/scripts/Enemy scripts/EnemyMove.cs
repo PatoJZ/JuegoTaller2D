@@ -10,14 +10,23 @@ public class EnemyMove : MonoBehaviour
     public Directions typeOfEnemy;
     [Header("No modificar")]
     public bool chase=true;
+    public bool stun = false;
     public bool tackle = false;
     public GameObject PlayerM;
     [Header("Velocidades")]
     public float distanciaDeteccion;
     [SerializeField] private Vector2 speedBounce;
     [SerializeField] private float speed;
+    public float changeWay = 1;
     public float rotationSpeed = 45.0f; // Grados por segundos
     public float timer=0;
+    [Header("Sonidos General")]
+    private AudioSource audioSource;
+    public AudioClip walk;
+    [Header("Sonidos Rabano")]
+    public AudioClip roll;
+    [Header("Sonidos Zanahoria")]
+    public AudioClip spin;
     private bool limit=false;
     private float angle = 0.0f;
     public Vector3 direction;
@@ -32,6 +41,7 @@ public class EnemyMove : MonoBehaviour
         enemyAttack=GetComponent<EnemyAttack>();
         enemyAnimator = GetComponent<Animator>();
         enemyRb=GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Bounce(Vector2 pointHit)
@@ -53,6 +63,18 @@ public class EnemyMove : MonoBehaviour
             enemyAttack.DeadForZone();
         }
         enemyAnimator.SetBool("Chase",chase);
+        if (stun&& !enemyAttack.isDead)
+        {
+            timer += Time.deltaTime;
+            if (timer >= enemyAttack.timeOfStun)
+            {
+                timer = 0;
+                
+                chase = true;
+                enemyAttack.AnimationIdleRadish();
+                enemyAnimator.SetBool("AttackAnimation", false);
+            }
+        }
         if (chase && GetComponent<EnemyAttack>().health>0)
         {
             switch (typeOfEnemy)
@@ -60,7 +82,11 @@ public class EnemyMove : MonoBehaviour
                 case Directions.CUERPO:
                     enemyRb.velocity = new Vector2(0, 0);
                     FollowPlayer(true);
-
+                    if (!audioSource.isPlaying)
+                    {
+                        audioSource.clip = walk;
+                        audioSource.Play();
+                    }
                     if (PlayerM.transform.position.x >= transform.position.x)
                     {
                         gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -73,14 +99,16 @@ public class EnemyMove : MonoBehaviour
                     
                     if (distanciaAlJugador < distanciaDeteccion && !enemyAnimator.GetBool("Attacks"))
                     {
+                        
                         // El jugador está lo suficientemente cerca, realiza las acciones necesarias.
                         enemyAnimator.SetBool("Attacks", true);
                         enemyAnimator.SetTrigger("Attack");
-                        // Puedes llamar a funciones, activar comportamientos, etc.
+
                     }
                     break;
                 case Directions.DISPARADOR:
                     enemyRb.velocity = new Vector2(0, 0);
+                    
                     if (PlayerM.transform.position.x >= transform.position.x)
                     {
                         gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -98,7 +126,7 @@ public class EnemyMove : MonoBehaviour
                         timer += Time.deltaTime;
                         if (timer <= 2f)
                         {
-                            angle += rotationSpeed * Time.deltaTime;
+                            angle += rotationSpeed * Time.deltaTime*changeWay;
                         }
                         else if (timer <= 2.5f)
                         {
@@ -112,8 +140,13 @@ public class EnemyMove : MonoBehaviour
                     break;
                 case Directions.EMBESTIDA:
                     enemyRb.velocity = Vector2.zero;
+                    if (!tackle && !audioSource.isPlaying)
+                    {
 
-                    if (!tackle)
+                        audioSource.clip = walk;
+                        audioSource.Play();
+                    }
+                    if (!tackle&& !stun)
                     {
                             
                             FollowPlayer(true);
@@ -136,14 +169,21 @@ public class EnemyMove : MonoBehaviour
                         transform.position += direction * speed*2 * Time.deltaTime;
                         if (timer>=enemyAttack.timeOfCharge)
                         {
+                            timer = 0;
                             enemyAnimator.SetBool("Rolling", false);
                             chase = false;
                             enemyAnimator.SetBool("AttackAnimation", false);
                         }
                     }
+                    
                     break;
                 case Directions.EXPLOCION:
                     enemyRb.velocity = Vector2.zero;
+                    if (!audioSource.isPlaying)
+                    {
+                        audioSource.clip = walk;
+                        audioSource.Play();
+                    }
                     if (PlayerM.transform.position.x >= transform.position.x)
                     {
                         gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -156,8 +196,63 @@ public class EnemyMove : MonoBehaviour
 
                     break;
             }
-            
         }
+        //sonidos
+        
+        switch (typeOfEnemy)
+        {
+            case Directions.CUERPO:
+                if ((audioSource.isPlaying && !chase) || (audioSource.isPlaying && Time.timeScale == 0))
+                {
+                    audioSource.Stop();
+                }
+                break;
+            case Directions.DISPARADOR:
+                if (!enemyAnimator.GetBool("Spin"))
+                {
+                    audioSource.clip = walk;
+                }
+                else
+                {
+                    audioSource.clip = spin;
+                }
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+                if ((audioSource.isPlaying && !chase) || (audioSource.isPlaying && Time.timeScale == 0) )
+                {
+                    audioSource.Stop();
+                }
+                break;
+            case Directions.EMBESTIDA:
+                if (!tackle)
+                {
+                    audioSource.clip = walk;
+                }
+                else
+                {
+
+                    audioSource.clip = roll;
+                    
+                }
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+                if ((audioSource.isPlaying && !chase) || (audioSource.isPlaying && Time.timeScale == 0)|| (audioSource.isPlaying && stun))
+                {
+                    audioSource.Stop();
+                }
+                break;
+            case Directions.EXPLOCION:
+                if ((audioSource.isPlaying && !chase) || (audioSource.isPlaying && Time.timeScale == 0))
+                {
+                    audioSource.Stop();
+                }
+                break;
+        }
+        
     }
     
     private void OnCollisionStay2D(Collision2D collision)
@@ -165,7 +260,7 @@ public class EnemyMove : MonoBehaviour
         switch (typeOfEnemy)
         {
             case Directions.CUERPO:
-                if (!collision.gameObject.CompareTag("PJ")&&!collision.gameObject.CompareTag("Enemy"))
+                if (!collision.gameObject.CompareTag("PJ")&& !collision.gameObject.CompareTag("Enemy"))
                 {
                     EscapeObstacle(collision);
                 }
@@ -206,7 +301,7 @@ public class EnemyMove : MonoBehaviour
                 }
                 break;
             case Directions.EMBESTIDA:
-                if (collision.CompareTag("Limit")&& !enemyAnimator.GetBool("AttackAnimation"))
+                if (collision.CompareTag("Limit")&& !enemyAnimator.GetBool("AttackAnimation")&& !stun)
                 {
                     chase = false;
                     enemyAnimator.SetBool("AttackAnimation",true);
@@ -243,20 +338,20 @@ public class EnemyMove : MonoBehaviour
     {
         if (collision.gameObject.transform.position.x <= PlayerM.transform.position.x)
         {
-            transform.position = new Vector3(transform.position.x + ((speed * Time.deltaTime) / 2), transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + ((speed * Time.deltaTime) ), transform.position.y, transform.position.z);
         }
         else
         {
-            transform.position = new Vector3(transform.position.x - ((speed * Time.deltaTime) / 2), transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - ((speed * Time.deltaTime) ), transform.position.y, transform.position.z);
         }
 
         if (collision.gameObject.transform.position.y <= PlayerM.transform.position.y)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + ((speed * Time.deltaTime) / 2), transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y + ((speed * Time.deltaTime) ), transform.position.z);
         }
         else
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - ((speed * Time.deltaTime) / 2), transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - ((speed * Time.deltaTime) ), transform.position.z);
         }
     }
 }

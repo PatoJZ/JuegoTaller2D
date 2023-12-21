@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c31411b8ff27914f80fe5162f73cac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAttack: 1
+  damageAttack: 2
+  audioClip: {fileID: 8300000, guid: f89f44e6afa2cc44b936dfda03c462cf, type: 3}
 --- !u!70 &7355036964802525574
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

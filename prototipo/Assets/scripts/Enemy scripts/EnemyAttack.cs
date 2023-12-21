@@ -14,15 +14,25 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] public float damageAttack;
     [Header("Tiempos")]
     [SerializeField] public float timeOutOfControl;
+    [SerializeField] public float timeOfStun;
     [SerializeField] public float timeOfCharge;
     public RoundManager roundManager;
-    private bool isDead=false;
+    public bool isDead=false;
     private Animator enemyAnimator;
     private Rigidbody2D rb;
     public GameObject bullet;
     public Light2D light;
     [Header("Sonidos")]
+    private AudioSource audioSource;
     public AudioClip damageRecive;
+    [Header("Sonidos Papa")]
+    public AudioClip roar;
+    [Header("Sonidos Zanahoria")]
+    public AudioClip Lanzamiento;
+    [Header("Sonidos Coliflor")]
+    public AudioClip explotion;
+    [Header("dropeo PowerUp")]
+    public GameObject[] powerUp;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,17 +43,30 @@ public class EnemyAttack : MonoBehaviour
         {
             light.intensity = 0;
         }
-        
+        audioSource = GetComponent<AudioSource>();
+
+    }
+    private void RandomDrop()
+    {
+        float rand = Random.Range(0f, 4f);
+        int randInt = Mathf.RoundToInt(rand);
+        Instantiate(powerUp[randInt], transform.position, transform.rotation);
     }
     // quitar vida del enemigo donde se pide el daño y la posicion de enpuje
     public void TakeEnemyDamage(float damage, Vector2 position)
     {
             health -= damage;
-
             StartCoroutine(OutOfControl());
             enemyMove.Bounce(position);
             if (health <= 0)
             {
+                float rand = Random.Range(1f, 11f);
+                int randInt = Mathf.RoundToInt(rand);
+                if (randInt==5f)
+                {
+                    RandomDrop();
+                }
+                Debug.Log(randInt);
                 isDead = true;
                 ControllerSave.instance.point += 10;
                 animationDead();
@@ -71,6 +94,7 @@ public class EnemyAttack : MonoBehaviour
         switch (typeOfEnemy)
         {
             case Directions.EMBESTIDA:
+                enemyMove.chase = false;
                 yield return new WaitForSeconds(timeOutOfControl);
                 rb.velocity = Vector2.zero;
                 break;
@@ -97,6 +121,10 @@ public class EnemyAttack : MonoBehaviour
     {
         enemyAnimator.SetTrigger("Damage");
     }
+    public void BiteSound()
+    {
+        audioSource.PlayOneShot(roar);
+    }
     ///////******************Rabano**********************///////
     public void StartRolling()
     {
@@ -119,17 +147,12 @@ public class EnemyAttack : MonoBehaviour
     {
         enemyAnimator.SetBool("Rolling", false);
         enemyMove.tackle = false;
-        enemyAnimator.SetBool("Stun",true);
-        StartCoroutine(EnemyStun());
-    }
-    private IEnumerator EnemyStun()
-    {
-        yield return new WaitForSeconds(2);
-        enemyAnimator.SetBool("Stun", false);
-        enemyMove.chase = true;
         enemyAnimator.SetBool("AttackAnimation", false);
-        enemyAnimator.SetTrigger("Idle");
+        enemyAnimator.SetTrigger("Stun");
+        enemyMove.stun = true;
+        
     }
+    
     private void AnimationDamageRadish()
     {
         enemyAnimator.SetTrigger("Damage");
@@ -137,11 +160,11 @@ public class EnemyAttack : MonoBehaviour
     }
     public void AnimationIdleRadish()
     {
-        enemyAnimator.SetBool("Stun", false);
         enemyMove.chase = true;
         enemyMove.tackle = false;
         enemyAnimator.SetBool("AttackAnimation", false);
         enemyAnimator.SetTrigger("Idle");
+        enemyMove.stun = false;
     }
     ///////******************Zanahoria**********************///////
     public void StarSpinning()
@@ -183,6 +206,10 @@ public class EnemyAttack : MonoBehaviour
         enemyAnimator.SetTrigger("Damage");
         StopAllCoroutines();
     }
+    public void Soundlanzamiento()
+    {
+        ControllerSound.instance.ExecuteSound(Lanzamiento);
+    }
     ///////******************Coliflor**********************///////
     public void AnimationIdleCauliflower()
     {
@@ -211,6 +238,7 @@ public class EnemyAttack : MonoBehaviour
     }
     public void Explotion()
     {
+        ControllerSound.instance.ExecuteSound(explotion);
         Instantiate(bullet,transform.position,transform.rotation);
         roundManager.EnemigoEliminado();
         FindObjectOfType<ControllerHUD>().enemyPoints++;
@@ -221,8 +249,9 @@ public class EnemyAttack : MonoBehaviour
 
         switch (typeOfEnemy)
         {
+
             default:
-                if (collision.gameObject.CompareTag("PJ"))
+                if (collision.gameObject.CompareTag("PJ") && !isDead)
                 {
                     
                     collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(damageAttack, collision.GetContact(0).normal);
@@ -230,26 +259,55 @@ public class EnemyAttack : MonoBehaviour
                 }
 
                 break;
+            case Directions.EMBESTIDA:
+
+                if (collision.gameObject.CompareTag("PJ") && !isDead)
+                {
+                    if (enemyAnimator.GetBool("AttackAnimation"))
+                    {
+                        collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(damageAttack, collision.GetContact(0).normal);
+                    }
+                    else
+                    {
+                        ControllerSound.instance.ExecuteSound(damageRecive);
+                        collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(1, collision.GetContact(0).normal);
+                    }
+                    
+                }
+
+                break;
             case Directions.EXPLOCION:
-                if (collision.gameObject.CompareTag("PJ"))
+                if (collision.gameObject.CompareTag("PJ") && !isDead)
                 {
                     enemyMove.chase = false;
                     AnimationAttackCauliflower();
+                    
                 }
                 
                 break;
+            
         }
         switch (typeOfEnemy)
         {
             case Directions.EMBESTIDA:
-                
-                if (enemyAnimator.GetBool("AttackAnimation")&& !collision.gameObject.CompareTag("Enemy") && !isDead)
+
+                if (enemyAnimator.GetBool("AttackAnimation") && !collision.gameObject.CompareTag("Enemy") && !isDead)
                 {
                     enemyMove.timer = 0;
                     enemyMove.chase = false;
                     enemyAnimator.SetTrigger("Shock");
+
+                    ControllerSound.instance.ExecuteSound(damageRecive);
                 }
-                
+
+                break;
+            case Directions.DISPARADOR:
+
+                if (!collision.gameObject.CompareTag("Enemy") && !isDead)
+                {
+                    enemyMove.changeWay *= (-1);
+                }
+
                 break;
         }
     }
@@ -278,7 +336,7 @@ public class EnemyAttack : MonoBehaviour
                 break;
                 
             case Directions.EMBESTIDA:
-                if (collision.gameObject.CompareTag("Weapon")&& (enemyAnimator.GetBool("Stun"))&&!isDead)
+                if (collision.gameObject.CompareTag("Weapon")&& !enemyAnimator.GetBool("AttackAnimation")&& !isDead)
                 {
                     AnimationDamageRadish();
                     ControllerSound.instance.ExecuteSound(FindObjectOfType<PlayerAttack>().weaponSound);

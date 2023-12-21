@@ -24,6 +24,10 @@ public class RoundManager : MonoBehaviour
     [Header("puertas")]
     public GameObject[] doorBlock;
     public int zone;
+    [Header("Sonidos")]
+    public AudioClip startRound;
+    public AudioClip endRound;
+
 
     public void Start()
     {
@@ -52,8 +56,13 @@ public class RoundManager : MonoBehaviour
         }
         if (rondaActual>rondaFinal)
         {
+
             controllerHUD.DeleteRoundManagers();
         }
+    }
+    public void SoundStartRound()
+    {
+        ControllerSound.instance.ExecuteSound(startRound);
     }
     public void ComenzarNuevaRonda()
     {
@@ -63,6 +72,8 @@ public class RoundManager : MonoBehaviour
         totalEnemigosRondaActual = enemigosPorRonda;
         enemigosEliminados = 0;
         GenerarEnemigos();
+        if(rondaActual <= rondaFinal&&zone==FindObjectOfType<PlayerAttack>().zone)
+        SoundStartRound();
     }
 
     public void GenerarEnemigos()
@@ -100,6 +111,7 @@ public class RoundManager : MonoBehaviour
     public void RemoverSpawner()
     {
         int i=0;
+        ControllerSound.instance.ExecuteSound(endRound);
         foreach (EntitySpawner a in spawners)
         {
             spawners[i] = null;

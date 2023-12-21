@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUp: 0
+  itemRecolected: {fileID: 8300000, guid: fd7b618aac657ad4d8f50b13812a30a0, type: 3}
 --- !u!70 &2900591370753678314
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

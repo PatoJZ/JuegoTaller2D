@@ -13,6 +13,7 @@ public class CameraTutorial : MonoBehaviour
     public TMP_Text txtLeft;
     public TMP_Text txtRight;
     public TMP_Text txtObjetive;
+    public AudioClip click;
     private Tutorial tutorial;    
     private int i=0;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class CameraTutorial : MonoBehaviour
     }
     public void ChangeLeft()
     {
+        ControllerSound.instance.ExecuteSound(click);
         if (i - 1 <= 0)
         {
             left.SetActive(false);
@@ -56,6 +58,7 @@ public class CameraTutorial : MonoBehaviour
     }
     public void ChangeRight()
     {
+        ControllerSound.instance.ExecuteSound(click);
         if (i + 2 >= positionCamera.Length)
         {
             right.SetActive(false);

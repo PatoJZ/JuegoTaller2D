@@ -101,14 +101,16 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator ResetLevel()
     {
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
     }
     private void Dead()
     {
+        
         StartCoroutine(ResetLevel());
     }
     public void AnimationDead()
     {
+        ControllerSound.instance.ExecuteSound(dead);
         playerAnimator.SetTrigger("death");
     }
     //se quitara el control del player

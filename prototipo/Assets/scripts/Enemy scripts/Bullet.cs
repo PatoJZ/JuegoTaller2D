@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [Header("Ataque")]
     public float damageAttack=1;
+    public AudioClip audioClip;
     
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,9 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("PJ"))
         {
             collision.gameObject.GetComponent<PlayerAttack>().TakeDamage(damageAttack, collision.GetContact(0).normal);
+            ControllerSound.instance.ExecuteSound(audioClip);
             Destroy(gameObject);
+
         }
         if (!collision.gameObject.CompareTag("Enemy"))
         {

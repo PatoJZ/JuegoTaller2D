@@ -6,6 +6,7 @@ public class GivePowerUp : MonoBehaviour
 {
     public enum Directions { SPEED,FORCE,SPEEDFORCE}
     public Directions powerUp;
+    public AudioClip itemRecolected;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,6 +28,7 @@ public class GivePowerUp : MonoBehaviour
                     break;
                 
             }
+            ControllerSound.instance.ExecuteSound(itemRecolected);
             Destroy(gameObject);
         }
     }

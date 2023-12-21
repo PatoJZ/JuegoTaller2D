@@ -21,15 +21,19 @@ public class CameraFollow : MonoBehaviour
     public GameObject[] Npc;
     public Vector3[] npcPosition;
     private bool isTheSameZone=false;
+    public Vector2[] resolutionAdd;
+    private int indiceresolucion=0;
 
     // Update is called once per frame
     void Update()
     {
+        
         Vector3 targetPosition = new Vector3(Target.transform.position.x,Target.transform.position.y,transform.position.z);
         if (!isCinematic)
         {
-            targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition[i].x, maxPosition[i].x);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition[i].y, maxPosition[i].y);
+            Resolutions();
+            targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition[i].x-resolutionAdd[indiceresolucion].x, maxPosition[i].x + resolutionAdd[indiceresolucion].x);
+            targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition[i].y - resolutionAdd[indiceresolucion].y, maxPosition[i].y + resolutionAdd[indiceresolucion].y);
 
             transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
         }
@@ -44,6 +48,37 @@ public class CameraFollow : MonoBehaviour
             }
             transform.position = Vector3.Lerp(transform.position, new Vector3(cinematic.x, cinematic.y, transform.position.z),smoothing);
 
+        }
+    }
+    public void Resolutions()
+    {
+        if (Screen.width==640&&Screen.height==480)
+        {
+            indiceresolucion = 0;
+        }
+        else if(Screen.width == 720 && Screen.height == 480)
+        {
+            indiceresolucion = 1;
+        }
+        else if (Screen.width == 720 && Screen.height == 576)
+        {
+            indiceresolucion = 2;
+        }
+        else if (Screen.width == 1024 && Screen.height == 768)
+        {
+            indiceresolucion = 3;
+        }
+        else if (Screen.width == 1366 && Screen.height == 768)
+        {
+            indiceresolucion = 4;
+        }
+        else if (Screen.width == 1600 && Screen.height == 900)
+        {
+            indiceresolucion = 5;
+        }
+        else
+        {
+            indiceresolucion = 6;
         }
     }
     public void StartCinematic(Vector2 cinema, GameObject a)
@@ -82,6 +117,7 @@ public class CameraFollow : MonoBehaviour
         }
         if (FindObjectOfType<ControllerHUD>().roundsManager[FindObjectOfType<ControllerHUD>().indice] != null&& !isTheSameZone)
         {
+            FindObjectOfType<ControllerHUD>().roundsManager[FindObjectOfType<ControllerHUD>().indice].GetComponent<RoundManager>().SoundStartRound();
             FindObjectOfType<ControllerHUD>().DefineRonda();
             FindObjectOfType<ControllerHUD>().ResetBarra();
         }

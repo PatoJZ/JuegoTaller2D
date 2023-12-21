@@ -7,6 +7,7 @@ public class ChangeScene : MonoBehaviour
 {
     [Header("Escena")]
     public int NewScene;
+    public AudioClip click;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,25 @@ public class ChangeScene : MonoBehaviour
     }
     public void LoadNewScene()
     {
+        ControllerSound.instance.ExecuteSound(click);
         SceneManager.LoadScene(NewScene);
+    }
+    public void LoadOptions()
+    {
+        
+        ControllerSound.instance.ExecuteSound(click);
+        SceneManager.LoadScene(NewScene);
+        DontDestroy.instance.GetComponent<Options>().ActiveOptionsInicio();
+    }
+    public void LoadInicio()
+    {
+        ControllerSound.instance.ExecuteSound(click);
+        SceneManager.LoadScene(NewScene);
+        DontDestroy.instance.GetComponent<Options>().DesactiveOptionsInicio();
     }
     public void EndGame()
     {
+        ControllerSound.instance.ExecuteSound(click);
         Application.Quit();
     }
     private void OnCollisionEnter2D(Collision2D collision)

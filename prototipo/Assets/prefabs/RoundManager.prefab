@@ -47,11 +47,18 @@ MonoBehaviour:
   spawners:
   - {fileID: 0}
   jugador: {fileID: 1607904436902039893, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
-  rondasText: {fileID: 8964821282503174326, guid: e00505c0a995e674383affce8202032b, type: 3}
-  enemigosText: {fileID: 0}
   rondaActual: 0
+  rondaFinal: 2
   enemigosPorRonda: 2
   totalEnemigosRondaActual: 0
+  enemigosGenerados: 1
+  enemigosEliminados: 0
   duracionParpadeo: 3
   intervaloParpadeo: 0.5
   Generacion: 0
+  eliminar: 0
+  controllerHUD: {fileID: 0}
+  doorBlock: []
+  zone: 0
+  startRound: {fileID: 8300000, guid: 6f904196457cdd84bab1921e08e61188, type: 3}
+  endRound: {fileID: 8300000, guid: 8e0a9e19199b8094c8f045fc775428f8, type: 3}

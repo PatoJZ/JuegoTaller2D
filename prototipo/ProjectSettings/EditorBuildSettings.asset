@@ -8,18 +8,24 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/inicio.unity
     guid: add1bdb9ca071fe4292850756f306ca9
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Opciones.unity
+    guid: 9cbba8fb1a96fb048b08774e45b55c1a
+  - enabled: 1
     path: Assets/Scenes/Controles.unity
     guid: ce3b0be8359aa8545ac8a1b200cf1353
   - enabled: 1
     path: Assets/Scenes/Nivel.unity
     guid: e13957c2f2ee6dc4eb0d11f6e2bec7f1
-  - enabled: 0
-    path: Assets/Scenes/final.unity
+  - enabled: 1
+    path: Assets/Scenes/derrota.unity
     guid: 977418e6baf0c2e48bd6f64f6d4a68e0
+  - enabled: 1
+    path: Assets/Scenes/victoria.unity
+    guid: ad2ba0e37e2fb004696b03aa8a255992
   - enabled: 0
     path: Assets/Scenes/Juego.unity
     guid: 7b04765482490694e98ab488211b993d

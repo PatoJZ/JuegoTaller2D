@@ -315,11 +315,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed6e36af33b03e47bda77aab324d240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointNecesary: 150
+  roundMax: 0
   key: llave
   needKey: 0
+  roundManager: {fileID: 0}
   locket: {fileID: 2155067422394407196}
   keyE: {fileID: 6320262639754390299}
+  abrir: {fileID: 8300000, guid: d42e9aa993a4e4f4b9996622f108a15e, type: 3}
 --- !u!70 &6881500090423676229
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

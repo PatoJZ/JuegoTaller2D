@@ -17,6 +17,12 @@ public class PlayerControl : MonoBehaviour
     [Header("Posicion Jugador")]
     public Vector2 savePlace;
     public Vector2 angulo_base;
+
+    [Header("Codigo")]
+
+    private AudioSource audioSource;
+    public AudioClip Walk;
+
     [Header("Codigo")]
     public AudioClip sonidoNuevo;
     private List<KeyCode> codigoSecreto = new List<KeyCode> {
@@ -47,6 +53,8 @@ public class PlayerControl : MonoBehaviour
         playerAttack.SetHitDamage();
         savePlace=new Vector2(0,-1);
         material = GetComponent<Renderer>().material;
+        audioSource = GetComponent<AudioSource>();
+
     }
     //cambiar de lado la escala
     void Animation(float x,float y)
@@ -230,6 +238,15 @@ public class PlayerControl : MonoBehaviour
         // vector base = new vector2(miposicion.x - limitecirculo,x, lo mismo en y);
         // vector enemigo = new Vector2(miposicion.x - posicionenemiga.x, lo mismo en y);
         //Debug.Log("atacar es : "+canAttack);
+        if (canMove && !audioSource.isPlaying && moveInput.magnitude > 0)
+        {
+            audioSource.clip = Walk;
+            audioSource.Play();
+        }
+        if (!canMove || moveInput.magnitude == 0 || Time.timeScale == 0)
+        {
+            audioSource.Stop();
+        }
     }
     private void FixedUpdate()
     {
@@ -239,7 +256,22 @@ public class PlayerControl : MonoBehaviour
             // se anula la velocidad de rebote
             playerRb.velocity = new Vector2(0,0);
             playerRb.MovePosition(playerRb.position+moveInput*speed*Time.fixedDeltaTime);
-        } 
+        }
+        if (canMove&& !audioSource.isPlaying&& moveInput.magnitude > 0)
+        {
+            audioSource.clip = Walk;
+            audioSource.Play();
+        }
+        if (!canMove || moveInput.magnitude==0 || Time.timeScale==0)
+        {
+            audioSource.Stop();
+        }
+        if (Time.timeScale == 0)
+        {
+            Debug.Log("Tiempo detenido");
+            Debug.Log(Time.timeScale);
+        }
+
     }
 
 }

@@ -10,6 +10,9 @@ public class Abrir : MonoBehaviour
     public RoundManager roundManager;
     public GameObject locket;
     public GameObject keyE;
+    [Header("Sonidos")]
+    public AudioClip abrir;
+
     private Animator keyEAnimator;
     private void Start()
     {
@@ -47,7 +50,7 @@ public class Abrir : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PJ"))
         {
-            if (collision.gameObject.GetComponent<PlayerAttack>().HaveItem(key))
+            if (collision.gameObject.GetComponent<PlayerAttack>().HaveItem(key)&& needKey)
             {
                 keyE.SetActive(true);
                 keyEAnimator.SetTrigger("E");
@@ -68,6 +71,7 @@ public class Abrir : MonoBehaviour
                 {
                     if (collision.gameObject.GetComponent<PlayerAttack>().HaveItem(key))
                     {
+                        ControllerSound.instance.ExecuteSound(abrir);
                         Destroy(gameObject);
                     }
                 }

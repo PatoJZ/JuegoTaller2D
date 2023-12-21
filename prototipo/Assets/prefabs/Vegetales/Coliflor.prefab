@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 543476352414038611}
   - component: {fileID: 2764595433013587030}
   - component: {fileID: 5560840754119351520}
+  - component: {fileID: -3695335555611161254}
   m_Layer: 6
   m_Name: Coliflor
   m_TagString: Enemy
@@ -306,12 +307,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeOfEnemy: 3
   chase: 0
+  stun: 0
   tackle: 0
   PlayerM: {fileID: 7377940980398133958, guid: c3392b7bd1fd0344a9be92d8f5903c1e, type: 3}
   distanciaDeteccion: 0
   speedBounce: {x: 5, y: 5}
   speed: 3
+  changeWay: 1
   rotationSpeed: 45
+  timer: 0
+  walk: {fileID: 8300000, guid: 00fb58a978b0d6e4bb1b4dd747831a1f, type: 3}
+  roll: {fileID: 0}
+  spin: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   zone: 0
 --- !u!114 &5560840754119351520
@@ -327,9 +334,117 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfEnemy: 3
-  health: 3
+  health: 2
   damageAttack: 1
   timeOutOfControl: 0.3
+  timeOfStun: 0
   timeOfCharge: 0
+  roundManager: {fileID: 0}
+  isDead: 0
   bullet: {fileID: 5929829854100684793, guid: 1099453765ffaae45a1c102de514a919, type: 3}
   light: {fileID: 7500799358410366803}
+  damageRecive: {fileID: 8300000, guid: f89f44e6afa2cc44b936dfda03c462cf, type: 3}
+  roar: {fileID: 0}
+  Lanzamiento: {fileID: 0}
+  explotion: {fileID: 8300000, guid: 82613e73b8a9c054794a5aca6908bf42, type: 3}
+  powerUp:
+  - {fileID: 603528703629678209, guid: 55f06fd07c6cf5046901091f329f2de6, type: 3}
+  - {fileID: 4524511577451767215, guid: 42a96fab24b4fce4bb2f520f02bd2a6a, type: 3}
+  - {fileID: 379068123630177883, guid: e3de99e6ec372ee41a6dab6e5823b168, type: 3}
+  - {fileID: 603528703629678209, guid: 55f06fd07c6cf5046901091f329f2de6, type: 3}
+--- !u!82 &-3695335555611161254
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470249600716349543}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

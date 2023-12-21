@@ -40,7 +40,7 @@ public class ControllerHUD : MonoBehaviour
     [Header("Pause")]
     public GameObject Pause;
     public GameObject controles;
-    public GameObject opciones;
+    public AudioClip click;
 
     [Header("Dialog Box")]
     public GameObject dialogBox;
@@ -111,7 +111,7 @@ public class ControllerHUD : MonoBehaviour
             Time.timeScale = 0;
             Pause.SetActive(true);
 
-        } else if (Input.GetKeyDown(KeyCode.Escape) && !dialogBox.activeSelf && !npcDialogBox.activeSelf &&!controles.activeSelf && !opciones.activeSelf)
+        } else if (Input.GetKeyDown(KeyCode.Escape) && !dialogBox.activeSelf && !npcDialogBox.activeSelf &&!controles.activeSelf && !FindObjectOfType<Options>().panel.activeSelf)
         {
             Time.timeScale = 1;
             Pause.SetActive(false);
@@ -128,38 +128,46 @@ public class ControllerHUD : MonoBehaviour
         {
             barraRondas.SetActive(false);
         }
-
     }
     // botones menu
     public void Continue()
     {
         Time.timeScale = 1;
+        ControllerSound.instance.ExecuteSound(click);
         Pause.SetActive(false);
     }
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(2);
+        ControllerSound.instance.ExecuteSound(click);
+        SceneManager.LoadScene(3);
     }
     public void Quit()
     {
+        ControllerSound.instance.ExecuteSound(click);
         Application.Quit();
     }
     public void Abrir()
     {
+        ControllerSound.instance.ExecuteSound(click);
         controles.SetActive(true);
     }
     public void Cerrar()
     {
+        ControllerSound.instance.ExecuteSound(click);
         controles.SetActive(false);
     }
     public void Abrir2()
     {
-        opciones.SetActive(true);
+        ControllerSound.instance.ExecuteSound(click);
+        FindObjectOfType<Options>().panel.SetActive(true);
     }
-    public void Cerrar2()
+    public void Menu()
     {
-        opciones.SetActive(false);
+        ControllerSound.instance.ExecuteSound(click);
+        Screen.SetResolution(1920, 1080, Screen.fullScreen);
+        FindObjectOfType<Options>().RevisarResolucion();
+        SceneManager.LoadScene(0);
     }
     //corazones
 
@@ -362,6 +370,7 @@ public class ControllerHUD : MonoBehaviour
             
             i++;
         }
+        
     }
     public void DefineRonda()
     {
@@ -411,5 +420,6 @@ public class ControllerHUD : MonoBehaviour
             rondaActual++;
         }
     }
+    
 
 }
