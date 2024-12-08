@@ -41,7 +41,8 @@ public class PlayerAttack : MonoBehaviour
     public bool weaponBlock = true;
     
     private List<string> nameItem = new List<string>();
-    private List<Sprite>  imageItem = new List<Sprite>();
+    private List<Sprite> imageItem = new List<Sprite>();
+    private List<string> typeItem = new List<string>();
     [Header("Sonidos")]
     public AudioClip dead;
     public AudioClip weaponSound;
@@ -55,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
         playerControl = GetComponent<PlayerControl>();
         playerAnimator = GetComponent<Animator>();
         controllerHUD = FindObjectOfType<ControllerHUD>();
-        controllerHUD.UpdateItem(imageItem);
+        controllerHUD.UpdateItem(imageItem, typeItem);
     }
     public void EndAttack()
     {
@@ -237,11 +238,18 @@ public class PlayerAttack : MonoBehaviour
                 break;
         }
     }
-    public void saveItem(string a, Sprite b)
+    public void saveItem(string a, Sprite b,string c)
     {
         nameItem.Add(a);
+        if (!typeItem.Contains(c))
+        {
+            
+            
+        }
         imageItem.Add(b);
-        controllerHUD.UpdateItem(imageItem);
+        typeItem.Add(c);
+
+        controllerHUD.UpdateItem(imageItem,typeItem);
     }
     public bool isItem(string[] name,string keyName,Sprite items)
     {
@@ -266,14 +274,19 @@ public class PlayerAttack : MonoBehaviour
         }
         if (max == name.Length)
         {
+            FindAnyObjectByType<ControllerHUD>().RemoveType(typeItem[datos[0]]);
             nameItem[datos[0]] = keyName;
             imageItem[datos[0]] = items;
-            controllerHUD.UpdateItem(imageItem);
+            typeItem[datos[0]] = keyName;
+
+
+            controllerHUD.UpdateItem(imageItem,typeItem);
             for (int j = datos.Count-1; j >0; j--)
             {
                 nameItem.RemoveAt(datos[j]);
                 imageItem.RemoveAt(datos[j]);
-                controllerHUD.UpdateItem(imageItem);
+                typeItem.RemoveAt(datos[j]);
+                controllerHUD.UpdateItem(imageItem, typeItem);
             }
             if (keyName==weaponName)
             {

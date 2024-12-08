@@ -7,6 +7,7 @@ public class ItemMission : MonoBehaviour
 {
     public string name;
     public Sprite item;
+    public string type;
     public AudioClip recolect;
     // Start is called before the first frame update
     // Update is called once per frame
@@ -15,7 +16,7 @@ public class ItemMission : MonoBehaviour
         if (collision.CompareTag("PJ"))
         {
             ControllerSound.instance.ExecuteSound(recolect);
-            collision.gameObject.GetComponent<PlayerAttack>().saveItem(name,item);
+            collision.gameObject.GetComponent<PlayerAttack>().saveItem(name,item,type);
             Destroy(gameObject);
         }
     }

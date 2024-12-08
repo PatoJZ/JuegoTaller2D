@@ -58,8 +58,10 @@ public class ControllerHUD : MonoBehaviour
 
     [Header("Item")]
     
-    public Image[] numOfItems;
+    public GameObject[] numOfItems;
+    public TMP_Text totalItem;
     public Sprite imageDefault;
+    private List<string> type= new List<string>();
     
     [Header("roundManager")]
     
@@ -342,15 +344,62 @@ public class ControllerHUD : MonoBehaviour
                 break;
         }
     }
-    public void UpdateItem(List<Sprite> imageItem)
+    public void RemoveType(string remove)
     {
+        type.RemoveAll(type => type==remove);
+    }
+    public void UpdateItem(List<Sprite> imageItem,List<string> typeItem)
+    {
+        int count = 0;
+        int currentCount = 0;
         for (int i = 0; i < numOfItems.Length; i++)
         {
+            if (count < typeItem.Count)
+            {
+                numOfItems[i].SetActive(true);
                 
-            if (imageItem.Count > 0 && i < imageItem.Count)
-                numOfItems[i].sprite = imageItem[i];
+                string current = "";
+                if (type.Count!=i)
+                {
+                    current = type[i];
+                }
+                else
+                {
+                    current = "";
+                }
+                Debug.Log(current);
+                
+                
+                for (int j=0; j<typeItem.Count;j++)
+                {
+                    if(!type.Contains(typeItem[j]))
+                    type.Add(typeItem[j]);
+                    
+                        if(typeItem[j] == current || current == "")
+                        {
+                            currentCount++;
+                        numOfItems[i].GetComponent<Image>().sprite = imageItem[j];
+                        }
+                    
+
+                }
+                if (currentCount >1)
+                {
+                    numOfItems[i].GetComponentInChildren<TMP_Text>().text = currentCount.ToString();
+                }
+                else
+                {
+                    numOfItems[i].GetComponentInChildren<TMP_Text>().text = "";
+                }
+                count = currentCount;
+                currentCount = 0;
+            }
             else
-                numOfItems[i].sprite = imageDefault;
+            {
+                numOfItems[i].SetActive(false);
+            }
+            
+            
                 
         }
         
