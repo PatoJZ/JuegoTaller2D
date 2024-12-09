@@ -241,11 +241,6 @@ public class PlayerAttack : MonoBehaviour
     public void saveItem(string a, Sprite b,string c)
     {
         nameItem.Add(a);
-        if (!typeItem.Contains(c))
-        {
-            
-            
-        }
         imageItem.Add(b);
         typeItem.Add(c);
 
@@ -275,19 +270,29 @@ public class PlayerAttack : MonoBehaviour
         if (max == name.Length)
         {
             FindAnyObjectByType<ControllerHUD>().RemoveType(typeItem[datos[0]]);
-            nameItem[datos[0]] = keyName;
-            imageItem[datos[0]] = items;
-            typeItem[datos[0]] = keyName;
+            
+            
 
-
-            controllerHUD.UpdateItem(imageItem,typeItem);
-            for (int j = datos.Count-1; j >0; j--)
+            //controllerHUD.UpdateItem(imageItem, typeItem);
+            for (int j = datos.Count - 1; j > 0; j--)
             {
+                Debug.Log(j);
                 nameItem.RemoveAt(datos[j]);
                 imageItem.RemoveAt(datos[j]);
                 typeItem.RemoveAt(datos[j]);
-                controllerHUD.UpdateItem(imageItem, typeItem);
+                //controllerHUD.UpdateItem(imageItem, typeItem);
             }
+
+            nameItem.RemoveAt(datos[0]);
+            imageItem.RemoveAt(datos[0]);
+            typeItem.RemoveAt(datos[0]);
+
+            saveItem(keyName,items,keyName);
+            
+            
+            
+
+            
             if (keyName==weaponName)
             {
                 weaponBlock = false;

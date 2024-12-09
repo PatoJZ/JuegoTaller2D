@@ -40,6 +40,7 @@ public class ControllerHUD : MonoBehaviour
     [Header("Pause")]
     public GameObject Pause;
     public GameObject controles;
+    public GameObject Sure;
     public AudioClip click;
 
     [Header("Dialog Box")]
@@ -143,6 +144,16 @@ public class ControllerHUD : MonoBehaviour
         Time.timeScale = 1;
         ControllerSound.instance.ExecuteSound(click);
         SceneManager.LoadScene(3);
+    }
+    public void Volver()
+    {
+        ControllerSound.instance.ExecuteSound(click);
+        Sure.SetActive(false);
+    }
+    public void Seguro()
+    {
+        ControllerSound.instance.ExecuteSound(click);
+        Sure.SetActive(true);
     }
     public void Quit()
     {
@@ -316,13 +327,20 @@ public class ControllerHUD : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("m"))
                 {
+                    if (playerAttack.weaponBlock)
+                        hudWeaponAnimator.SetTrigger("HoeToShovelB");
+                    else
                     hudWeaponAnimator.SetTrigger("HoeToShovel");
                 }
                 break;
             case PlayerAttack.Directions.SHOVEL:
                 if (Input.GetKeyDown("n"))
                 {
-                    hudWeaponAnimator.SetTrigger("ShovelToHoe");
+                    
+                    if (playerAttack.weaponBlock)
+                        hudWeaponAnimator.SetTrigger("ShovelToHoeB");
+                    else
+                        hudWeaponAnimator.SetTrigger("ShovelToHoe");
                 }
                 else if (Input.GetKeyDown("m"))
                 {
@@ -367,7 +385,7 @@ public class ControllerHUD : MonoBehaviour
                 {
                     current = "";
                 }
-                Debug.Log(current);
+                //Debug.Log(current);
                 
                 
                 for (int j=0; j<typeItem.Count;j++)
@@ -378,7 +396,10 @@ public class ControllerHUD : MonoBehaviour
                         if(typeItem[j] == current || current == "")
                         {
                             currentCount++;
-                        numOfItems[i].GetComponent<Image>().sprite = imageItem[j];
+                        if (imageItem[j] != null)
+                            numOfItems[i].GetComponent<Image>().sprite = imageItem[j];
+                        else
+                            numOfItems[i].SetActive(false);
                         }
                     
 

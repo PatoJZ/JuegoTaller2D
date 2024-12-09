@@ -7250,6 +7250,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &395722793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395722794}
+  - component: {fileID: 395722795}
+  m_Layer: 0
+  m_Name: TutorialFrame (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395722794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395722793}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40.36, y: -1.4799, z: 3.1004117}
+  m_LocalScale: {x: 1.0671686, y: 1.0703157, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 501180888}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &395722795
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395722793}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 8f0238599d118664bbf5f2634e3bed00, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 4, y: 4}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &501180887
 GameObject:
   m_ObjectHideFlags: 0
@@ -7283,6 +7367,7 @@ Transform:
   - {fileID: 936384142}
   - {fileID: 825520672}
   - {fileID: 1263680299}
+  - {fileID: 395722794}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &562861293
@@ -10166,7 +10251,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.39134, y: 0.21719371, z: 0.19567}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1532761548}
@@ -10212,7 +10297,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: fffeb6e59a6213c42873d7e9fa042732, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 004a268960fefbe4fb0ecbd5b08c0ed4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10544,7 +10629,7 @@ MonoBehaviour:
   m_text: Moverse
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13163,7 +13248,7 @@ MonoBehaviour:
     a los enemigos.                                '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13615,7 +13700,7 @@ MonoBehaviour:
   m_text: '       Atacar'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

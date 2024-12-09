@@ -321,7 +321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 741b4583c178b4649b4afea5ad808ea3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de540d8179c3f0a46b4fb55b9195b2bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_text: Salir
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -731,7 +731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a31a4770aeceded4bbb021d64a59e7c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de540d8179c3f0a46b4fb55b9195b2bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_text: Reiniciar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

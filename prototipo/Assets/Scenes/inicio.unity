@@ -183,7 +183,7 @@ MonoBehaviour:
   m_text: Iniciar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -314,11 +314,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Autor: Patricio Jim\xE9nez Rodrigo Soto Matias Oyarzun\nAssets por ELV
-    Games y Elthen's\n"
+  m_text: "Autor: Patricio Jim\xE9nez, Rodrigo Soto, Mat\xEDas Oyarzun\nAssets por
+    ELV Games y Elthen's\nRedise\xF1o: Rodrigo Soto, Mat\xEDas Oyarzun, Vicente Santander,
+    Hector Villalobos"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -715,7 +716,7 @@ MonoBehaviour:
   m_text: Salir
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
-  m_sharedMaterial: {fileID: 2975880050418148543, guid: f033bec20ca6fed4aa9b6882b53f735d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 421f022e821f59b4f98297d391e15a77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1188,7 +1189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a31a4770aeceded4bbb021d64a59e7c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de540d8179c3f0a46b4fb55b9195b2bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1390,7 +1391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 741b4583c178b4649b4afea5ad808ea3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de540d8179c3f0a46b4fb55b9195b2bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1472,14 +1473,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 537d6cb476b1882499b60a6faaef9f59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 004a268960fefbe4fb0ecbd5b08c0ed4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
